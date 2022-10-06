@@ -1,4 +1,3 @@
-import 'dart:js';
 import 'dart:math';
 import'package:flutter/material.dart';
 import 'package:folding_cardboard/src/lottery_ticket_model.dart';
@@ -24,7 +23,7 @@ class _FoldingCardboardState extends State<FoldingCardboard> {
       child: Align(
         alignment: Alignment.topCenter,
         child: Container(
-          width: 400,
+          width: double.infinity,
           decoration: const BoxDecoration(
             borderRadius: BorderRadius.all(Radius.circular(20)),
             boxShadow: <BoxShadow>[
@@ -64,18 +63,9 @@ class _FoldingCardboardState extends State<FoldingCardboard> {
     );
   }
 
-  _cells(){
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: [
-        _cellsColumn(),
-        _cellsColumn(),
-        _cellsColumn(),
-        _cellsColumn(),
-        _cellsColumn(),
-      ],
-    );
-  }
+  List<TableRow> carton = List.generate(
+      5, (index) => List.generate(
+      7, (index) => _cells()))
   _cellsColumn(){
     return SizedBox(
       height: 35,
@@ -83,11 +73,11 @@ class _FoldingCardboardState extends State<FoldingCardboard> {
       child: ListView.builder(
         scrollDirection: Axis.vertical,
         itemCount: 10,
-        itemBuilder: (context,index) => _cell()
+        itemBuilder: (context,index) => _cells()
       ),
     );
   }
-  _cell(){
+  _cells(){
     return Padding(
       padding: const EdgeInsets.all(5.0),
       child: Container(
