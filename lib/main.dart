@@ -23,6 +23,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       home: Scaffold(
+        backgroundColor: Colors.purple.shade50,
           body: FoldingCardboard(
             title: 'Numero de carton',
             lotteryTicketModel: lotteryTicket,

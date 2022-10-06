@@ -1,3 +1,4 @@
+import 'dart:js';
 import 'dart:math';
 import'package:flutter/material.dart';
 import 'package:folding_cardboard/src/lottery_ticket_model.dart';
@@ -38,6 +39,7 @@ class _FoldingCardboardState extends State<FoldingCardboard> {
             borderRadius: BorderRadius.circular(20),
             child: ExpansionTile(
               childrenPadding: const EdgeInsets.symmetric(vertical: 10),
+              expandedAlignment: Alignment.centerRight,
               backgroundColor: Colors.white,
               collapsedBackgroundColor: Colors.white,
               iconColor: Colors.blue.shade900,
@@ -53,7 +55,7 @@ class _FoldingCardboardState extends State<FoldingCardboard> {
                 ],
               ),
               children: [
-                _cells(),
+                _cellsColumn(),
               ],
             ),
           ),
@@ -63,11 +65,9 @@ class _FoldingCardboardState extends State<FoldingCardboard> {
   }
 
   _cells(){
-    return Row(
+    return Column(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-        _cellsColumn(),
-        _cellsColumn(),
         _cellsColumn(),
         _cellsColumn(),
         _cellsColumn(),
@@ -77,15 +77,14 @@ class _FoldingCardboardState extends State<FoldingCardboard> {
     );
   }
   _cellsColumn(){
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: [
-        _cell(),
-        _cell(),
-        _cell(),
-        _cell(),
-        _cell(),
-      ],
+    return SizedBox(
+      height: 35,
+      width: 35,
+      child: ListView.builder(
+        scrollDirection: Axis.vertical,
+        itemCount: 10,
+        itemBuilder: (context,index) => _cell()
+      ),
     );
   }
   _cell(){
@@ -123,4 +122,6 @@ class _FoldingCardboardState extends State<FoldingCardboard> {
       ),
     );
   }
+  List<int> numbers = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,
+  27,28,29,30,31,32,33,34,35];
 }
