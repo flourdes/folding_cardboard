@@ -19,14 +19,37 @@ class MyApp extends StatelessWidget {
     LotteryTicketModel lotteryTicket= LotteryTicketModel(number: 0010987, numberList: list);
     return MaterialApp(
       title: 'Flutter Demo',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
       home: Scaffold(
         backgroundColor: Colors.purple.shade50,
-          body: FoldingCardboard(
-            title: 'Numero de carton',
-            lotteryTicketModel: lotteryTicket,
+          body: Center(
+            child: SizedBox(
+              height: 300,
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    FoldingCardboard(
+                      textColor: Colors.blue.shade900,
+                      title: 'Número de carton',
+                      lotteryTicketModel: lotteryTicket,
+                    ),
+                    FoldingCardboard(
+                      textColor: Colors.blue.shade900,
+                      title: 'Número de carton',
+                      lotteryTicketModel: lotteryTicket,
+                    ),
+                    FoldingCardboard(
+                      textColor: Colors.blue.shade900,
+                      title: 'Número de carton',
+                      lotteryTicketModel: lotteryTicket,
+                    ),
+                  ],
+                ),
+              ),
+            ),
           )
       ),
     );

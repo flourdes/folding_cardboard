@@ -1,15 +1,16 @@
-import 'dart:math';
 import'package:flutter/material.dart';
 import 'package:folding_cardboard/src/lottery_ticket_model.dart';
 
 class FoldingCardboard extends StatefulWidget {
-  final Color color;
+  final Color backgroundColor;
+  final Color textColor;
   final String title;
   final LotteryTicketModel lotteryTicketModel;
   const FoldingCardboard({Key? key,
     required this.title,
     required this.lotteryTicketModel,
-    this.color= Colors.white}) : super(key: key);
+    this.textColor = Colors.blue,
+    this.backgroundColor = Colors.white}) : super(key: key);
 
   @override
   State<FoldingCardboard> createState() => _FoldingCardboardState();
@@ -18,10 +19,13 @@ class FoldingCardboard extends StatefulWidget {
 class _FoldingCardboardState extends State<FoldingCardboard> {
   @override
   Widget build(BuildContext context) {
+    List<TableRow> numbersLottery = List.generate(
+        5, (indexCol) => TableRow(children: List.generate(
+        7, (indexRow) => _cells((indexCol*7+indexRow)))));
     return Padding(
-      padding: const EdgeInsets.all(20.0),
-      child: Align(
-        alignment: Alignment.topCenter,
+      padding: const EdgeInsets.only(left: 20,right: 20,top: 10),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(20),
         child: Container(
           width: double.infinity,
           decoration: const BoxDecoration(
@@ -34,84 +38,88 @@ class _FoldingCardboardState extends State<FoldingCardboard> {
               )
             ]
           ),
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(20),
-            child: ExpansionTile(
-              childrenPadding: const EdgeInsets.symmetric(vertical: 10),
-              expandedAlignment: Alignment.centerRight,
-              backgroundColor: Colors.white,
-              collapsedBackgroundColor: Colors.white,
-              iconColor: Colors.blue.shade900,
-              collapsedIconColor: Colors.blue.shade900,
-              title: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(10),
-                    child: Text(widget.title, style: TextStyle(color: Colors.blue.shade900),),
-                  ),
-                  _numberLottery(),
-                ],
-              ),
-              children: [
-                _cellsColumn(),
-              ],
-            ),
-          ),
+          child: _expansionTile(numbersLottery),
         ),
       ),
     );
   }
 
-  List<TableRow> carton = List.generate(
-      5, (index) => List.generate(
-      7, (index) => _cells()))
-  _cellsColumn(){
-    return SizedBox(
-      height: 35,
-      width: 35,
-      child: ListView.builder(
-        scrollDirection: Axis.vertical,
-        itemCount: 10,
-        itemBuilder: (context,index) => _cells()
+  _expansionTile(numbersLottery){
+    return ExpansionTile(
+      childrenPadding: const EdgeInsets.all(10),
+      expandedAlignment: Alignment.centerRight,
+      backgroundColor: widget.backgroundColor,
+      collapsedBackgroundColor: widget.backgroundColor,
+      iconColor: widget.textColor,
+      collapsedIconColor: widget.textColor,
+      title: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(10),
+            child: Text(
+              widget.title,
+              style: TextStyle(
+                color: widget.textColor,
+                letterSpacing: 1,
+                fontSize: 20,
+              ),
+            ),
+          ),
+          _numberLotteryID(),
+        ],
+      ),
+      children: [
+        Table(
+          children: numbersLottery,
+        )
+      ],
+    );
+  }
+  _numberLotteryID(){
+    return Container(
+      height: 30,
+      width: 100,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(20),
+        border: Border.all(width: 1.5, color: widget.textColor),
+      ),
+      child: Center(
+        child: Text(
+          widget.lotteryTicketModel.number.toString(),
+          style: TextStyle(fontSize: 20,color: widget.textColor,letterSpacing: 2),
+        ),
       ),
     );
   }
-  _cells(){
+  _cells(index){
     return Padding(
       padding: const EdgeInsets.all(5.0),
       child: Container(
         height: 35,
-        width: 35,
+        width: double.infinity,
         decoration: const BoxDecoration(
           color: Colors.black12,
           borderRadius: BorderRadius.all(Radius.circular(8)),
         ),
         child: Center(
           child: Text(
-            Random().nextInt(90).toString(),
+            addNumbersLottery(index),
             style: const TextStyle(color: Colors.black),
           ),
         ),
       ),
     );
   }
-  _numberLottery(){
-    return Container(
-      height: 30,
-      width: 100,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(20),
-        border: Border.all(width: 1.5, color: Colors.blue.shade900),
-      ),
-      child: Center(
-        child: Text(
-          widget.lotteryTicketModel.number.toString(),
-          style: TextStyle(fontSize: 20,color: Colors.blue.shade700),
-        ),
-      ),
-    );
+  String addNumbersLottery(index){
+    if(index < numbers.length){
+      return numbers[index].toString();
+    }else{
+      return "-";
+    }
   }
+
   List<int> numbers = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,
-  27,28,29,30,31,32,33,34,35];
+  27,28,29,30,31,32,33,34];
+
 }
