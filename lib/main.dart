@@ -14,9 +14,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
 
       int intValue = Random().nextInt(90);
-      List<int>list=[intValue];
+      List<int> list = [intValue];
 
-    LotteryTicketModel lotteryTicket= LotteryTicketModel(number: 0010987, numberList: list);
+    LotteryTicketModel lotteryTicket = LotteryTicketModel(number: 9110987, numberList: list);
     return MaterialApp(
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,

@@ -112,8 +112,8 @@ class _FoldingCardboardState extends State<FoldingCardboard> {
     );
   }
   String addNumbersLottery(index){
-    if(index < numbers.length){
-      return numbers[index].toString();
+    if(index < widget.lotteryTicketModel.numberList.length){//numbers.length){
+      return widget.lotteryTicketModel.numberList[index].toString();//numbers[index].toString();
     }else{
       return "-";
     }
