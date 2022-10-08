@@ -46,7 +46,8 @@ class _FoldingCardboardState extends State<FoldingCardboard> {
 
   _expansionTile(numbersLottery){
     return ExpansionTile(
-      childrenPadding: const EdgeInsets.all(10),
+      tilePadding: const EdgeInsets.only(left: 10,right: 5),
+      childrenPadding: const EdgeInsets.all(5),
       expandedAlignment: Alignment.centerRight,
       backgroundColor: widget.backgroundColor,
       collapsedBackgroundColor: widget.backgroundColor,
@@ -55,15 +56,12 @@ class _FoldingCardboardState extends State<FoldingCardboard> {
       title: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Padding(
-            padding: const EdgeInsets.all(10),
-            child: Text(
-              widget.title,
-              style: TextStyle(
-                color: widget.textColor,
-                letterSpacing: 1,
-                fontSize: 20,
-              ),
+          Text(
+            widget.title,
+            style: TextStyle(
+              color: widget.textColor,
+              letterSpacing: 1,
+              fontSize: 20,
             ),
           ),
           _numberLotteryID(),
@@ -112,14 +110,13 @@ class _FoldingCardboardState extends State<FoldingCardboard> {
     );
   }
   String addNumbersLottery(index){
-    if(index < widget.lotteryTicketModel.numberList.length){//numbers.length){
-      return widget.lotteryTicketModel.numberList[index].toString();//numbers[index].toString();
+    if(index < widget.lotteryTicketModel.numberList.length){
+      return widget.lotteryTicketModel.numberList[index].toString();
     }else{
       return "-";
     }
   }
 
-  List<int> numbers = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,
-  27,28,29,30,31,32,33,34];
+  List<int> numbers = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26];
 
 }
