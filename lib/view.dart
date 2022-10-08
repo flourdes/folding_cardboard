@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:folding_cardboard/folding_cardboard_component.dart';
 import 'package:folding_cardboard/folding_cardboard_component_custom.dart';
@@ -14,30 +16,16 @@ class View extends StatefulWidget {
 class _ViewState extends State<View> {
   @override
   Widget build(BuildContext context) {
-    _generarCarton(n) {
-      List<List<int>> carton = [];
-      for (int i = 0; i < 5; i++) {
-        carton.add([
-          n + i,
-          n + i * 2,
-          n + i * 3,
-          n + i * 4,
-          n + i * 5,
-          n + i * 6,
-          n + i * 7
-        ]);
+    _numbersList() {
+      List<int> numbers = [];
+      for (int i = 0; i < 30; i++) {
+        numbers.add(Random().nextInt(90));
       }
-      return carton;
+      return numbers;
     }
 
-    List<List<int>> cartonA = _generarCarton(2);
-    List<List<int>> cartonB = _generarCarton(5);
-    List<List<int>> cartonC = _generarCarton(7);
-
-    LotteryTicketModel lotteryTicketA = LotteryTicketModel(number: 109870, numberList: cartonA);
-    LotteryTicketModel lotteryTicketB = LotteryTicketModel(number: 109871, numberList: cartonB);
-    LotteryTicketModel lotteryTicketC = LotteryTicketModel(number: 109872, numberList: cartonC);
-
+    LotteryTicketModel lotteryTicket =
+        LotteryTicketModel(number: 109870, numberList: _numbersList());
     return Scaffold(
       appBar: AppBar(
         title: const Text("Bingooo"),
@@ -51,26 +39,36 @@ class _ViewState extends State<View> {
               Padding(
                 padding: const EdgeInsets.all(20.0),
                 child: FoldingCardboardComponentCustom(
-                    lotteryTicketModel: lotteryTicketA),
+                    lotteryTicketModel: lotteryTicket),
               ),
-              const SizedBox(height: 30,),
+              const SizedBox(
+                height: 30,
+              ),
               Padding(
                 padding: const EdgeInsets.all(20.0),
                 child: FoldingCardboardComponentCustom(
-                    lotteryTicketModel: lotteryTicketB),
+                    lotteryTicketModel: lotteryTicket),
               ),
-              const SizedBox(height: 30,),
+              const SizedBox(
+                height: 30,
+              ),
               Padding(
                 padding: const EdgeInsets.all(20.0),
                 child: FoldingCardboardComponentCustom(
-                    lotteryTicketModel: lotteryTicketC),
+                    lotteryTicketModel: lotteryTicket),
               ),
-              const SizedBox(height: 30,),
-              FoldingCardboardComponent(lotteryTicketModel: lotteryTicketA),
-              const SizedBox(height: 30,),
-              FoldingCardboardComponent(lotteryTicketModel: lotteryTicketA),
-              const SizedBox(height: 30,),
-              FoldingCardboardComponent(lotteryTicketModel: lotteryTicketA),
+              const SizedBox(
+                height: 30,
+              ),
+              FoldingCardboardComponent(lotteryTicketModel: lotteryTicket),
+              const SizedBox(
+                height: 30,
+              ),
+              FoldingCardboardComponent(lotteryTicketModel: lotteryTicket),
+              const SizedBox(
+                height: 30,
+              ),
+              FoldingCardboardComponent(lotteryTicketModel: lotteryTicket),
             ],
           ),
         ),

@@ -52,36 +52,8 @@ class _FoldingCardboardComponentCustomState
   @override
   Widget build(BuildContext context) {
     List<TableRow> carton = List.generate(
-        5,
-        (indexCol) => TableRow(
-            children: List.generate(
-                7,
-                (int index) => Container(
-                      width: MediaQuery.of(context).size.width / 9,
-                      height: MediaQuery.of(context).size.width / 9,
-                      margin: const EdgeInsets.all(5),
-                      decoration: BoxDecoration(
-                          color: widget.cellColor,
-                          borderRadius: BorderRadius.circular(9),
-                          boxShadow: [
-                            BoxShadow(
-                              color: widget.cellColor.withOpacity(0.9),
-                              blurRadius: 2,
-                              offset: const Offset(3.5, 3.5),
-                            ),
-                          ]),
-                      alignment: Alignment.center,
-                      child: Text(
-                        widget.lotteryTicketModel.numberList[indexCol][index]
-                            .toString(),
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 14,
-                          color: widget.cellText,
-                        ),
-                      ),
-                    ))));
-
+        5,(indexCol) => TableRow(children: List.generate(
+        7,(indexRow) => _numbers(indexCol*7+indexRow))));
     return _expansionTable(carton);
   }
 
@@ -94,6 +66,41 @@ class _FoldingCardboardComponentCustomState
       }
       _isVisible = !_isVisible;
     });
+  }
+
+  _numbers(index){
+    return Container(
+      width: MediaQuery.of(context).size.width / 9,
+      height: MediaQuery.of(context).size.width / 9,
+      margin: const EdgeInsets.all(5),
+      decoration: BoxDecoration(
+          color: widget.cellColor,
+          borderRadius: BorderRadius.circular(9),
+          boxShadow: [
+            BoxShadow(
+              color: widget.cellColor.withOpacity(0.9),
+              blurRadius: 2,
+              offset: const Offset(3.5, 3.5),
+            ),
+          ]),
+      alignment: Alignment.center,
+      child: Text(
+        addNumbers(index),
+        style: TextStyle(
+          fontWeight: FontWeight.bold,
+          fontSize: 14,
+          color: widget.cellText,
+        ),
+      ),
+    );
+  }
+
+  String addNumbers(index){
+    if(index < widget.lotteryTicketModel.numberList.length){
+      return widget.lotteryTicketModel.numberList[index].toString();
+    }else{
+      return "-";
+    }
   }
 
   _expansionTable(carton) {
@@ -116,62 +123,65 @@ class _FoldingCardboardComponentCustomState
               color: widget.backgroundColor,
             ),
             child: Padding(
-              padding: const EdgeInsets.all(15), //separacion
+              padding: const EdgeInsets.symmetric(vertical: 15),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        "Número de cartón",
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w500,
-                          color: widget.colorMain, //colorMain
+                  Padding(
+                    padding: const EdgeInsets.only(left: 10),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          "Número de cartón",
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500,
+                            color: widget.colorMain, //colorMain
+                          ),
                         ),
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Container(
-                            height: 34,
-                            width: 90,
-                            alignment: Alignment.center,
-                            decoration: BoxDecoration(
-                              border: Border.all(
-                                width: 2,
-                                color: widget.colorMain, //colorMain
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Container(
+                              height: 34,
+                              width: 90,
+                              alignment: Alignment.center,
+                              decoration: BoxDecoration(
+                                border: Border.all(
+                                  width: 2,
+                                  color: widget.colorMain, //colorMain
+                                ),
+                                borderRadius: BorderRadius.circular(20),
                               ),
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                            child: Text(
-                              widget.lotteryTicketModel.number.toString(),
-                              style: TextStyle(
-                                color: widget.colorMain, //colorMain
-                                fontWeight: FontWeight.w600,
-                                letterSpacing: 1,
+                              child: Text(
+                                widget.lotteryTicketModel.number.toString(),
+                                style: TextStyle(
+                                  color: widget.colorMain, //colorMain
+                                  fontWeight: FontWeight.w600,
+                                  letterSpacing: 1,
+                                ),
                               ),
                             ),
-                          ),
-                          RotationTransition(
-                            turns: Tween(begin: 0.0, end: 1.0)
-                                .animate(_controller),
-                            child: Icon(
-                              Icons.arrow_drop_down,
-                              size: 36,
-                              color: widget.colorMain,
+                            RotationTransition(
+                              turns: Tween(begin: 0.0, end: 1.0)
+                                  .animate(_controller),
+                              child: Icon(
+                                Icons.arrow_drop_down,
+                                size: 36,
+                                color: widget.colorMain,
+                              ),
                             ),
-                          ),
-                        ],
-                      ),
-                    ],
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
                   Visibility(
                     maintainAnimation: false,
                     visible: _isVisible,
                     child: Padding(
-                      padding: const EdgeInsets.only(top: 15),
+                      padding: const EdgeInsets.only(top: 10,left: 5,right: 10),
                       child: Table(
                         children: carton,
                       ),

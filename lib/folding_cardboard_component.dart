@@ -25,27 +25,36 @@ class _FoldingCardboardComponentState extends State<FoldingCardboardComponent> {
         (indexCol) => TableRow(
             children: List.generate(
                 7,
-                (int index) => Container(
-                      width: 30,
-                      height: 30,
-                      margin: const EdgeInsets.all(5),
-                      decoration: BoxDecoration(
-                        color: const Color.fromARGB(255, 239, 239, 239),
-                        borderRadius: BorderRadius.circular(5),
-                      ),
-                      alignment: Alignment.center,
-                      child: Text(
-                        widget.lotteryTicketModel.numberList[indexCol][index].toString(),
-                        style: const TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 14,
-                          color: Color.fromARGB(255, 125, 125, 125),
-                        ),
-                      ),
-                    ))));
+                (indexRow) => _numbers(indexCol*7+indexRow))));
     return _expansionPanel(carton);
   }
-
+  _numbers(index){
+    return Container(
+      width: 30,
+      height: 30,
+      margin: const EdgeInsets.all(5),
+      decoration: BoxDecoration(
+        color: const Color.fromARGB(255, 239, 239, 239),
+        borderRadius: BorderRadius.circular(5),
+      ),
+      alignment: Alignment.center,
+      child: Text(
+        addNumbers(index),
+        style: const TextStyle(
+          fontWeight: FontWeight.bold,
+          fontSize: 14,
+          color: Color.fromARGB(255, 125, 125, 125),
+        ),
+      ),
+    );
+  }
+  String addNumbers(index){
+    if(index < widget.lotteryTicketModel.numberList.length){
+      return widget.lotteryTicketModel.numberList[index].toString();
+    }else{
+      return "-";
+    }
+  }
   Widget _expansionPanel(carton) {
     return Padding(
       padding: const EdgeInsets.all(15),
