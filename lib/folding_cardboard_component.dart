@@ -66,7 +66,7 @@ class _FoldingCardboardComponentState extends State<FoldingCardboardComponent> {
                         style: TextStyle(color: widget.color),
                       ),
                       const SizedBox(
-                        width: 30,
+                        width: 10,
                       ),
                       Container(
                         padding: const EdgeInsets.symmetric(

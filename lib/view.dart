@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'folding_cardboard_component.dart';
+import 'package:folding_cardboard/folding_cardboard_component.dart';
+import 'package:folding_cardboard/folding_cardboard_component_custom.dart';
 import 'models/lottery_ticket_model.dart';
 
 class View extends StatefulWidget {
@@ -13,7 +14,6 @@ class View extends StatefulWidget {
 class _ViewState extends State<View> {
   @override
   Widget build(BuildContext context) {
-
     _generarCarton(n) {
       List<List<int>> carton = [];
       for (int i = 0; i < 5; i++) {
@@ -34,33 +34,47 @@ class _ViewState extends State<View> {
     List<List<int>> cartonB = _generarCarton(5);
     List<List<int>> cartonC = _generarCarton(7);
 
-    LotteryTicketModel lotteryTicketA =
-        LotteryTicketModel(number: 109870, numberList: cartonA);
-    LotteryTicketModel lotteryTicketB =
-        LotteryTicketModel(number: 109871, numberList: cartonB);
-LotteryTicketModel lotteryTicketC =
-        LotteryTicketModel(number: 109872, numberList: cartonC);
+    LotteryTicketModel lotteryTicketA = LotteryTicketModel(number: 109870, numberList: cartonA);
+    LotteryTicketModel lotteryTicketB = LotteryTicketModel(number: 109871, numberList: cartonB);
+    LotteryTicketModel lotteryTicketC = LotteryTicketModel(number: 109872, numberList: cartonC);
 
     return Scaffold(
-        appBar: AppBar(
-          title: const Text("Bingooo"),
-        ),
-        body: SingleChildScrollView(
-            child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  FoldingCardboardComponent(lotteryTicketModel: lotteryTicketA),
-                  const SizedBox(
-                    height: 30,
-                  ),
-                  FoldingCardboardComponent(lotteryTicketModel: lotteryTicketB),
-                  const SizedBox(
-                    height: 30,
-                  ),
-                  FoldingCardboardComponent(lotteryTicketModel: lotteryTicketC),
-                ],
+      appBar: AppBar(
+        title: const Text("Bingooo"),
+      ),
+      body: Container(
+        color: Colors.grey,
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: FoldingCardboardComponentCustom(
+                    lotteryTicketModel: lotteryTicketA),
               ),
+              const SizedBox(height: 30,),
+              Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: FoldingCardboardComponentCustom(
+                    lotteryTicketModel: lotteryTicketB),
+              ),
+              const SizedBox(height: 30,),
+              Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: FoldingCardboardComponentCustom(
+                    lotteryTicketModel: lotteryTicketC),
+              ),
+              const SizedBox(height: 30,),
+              FoldingCardboardComponent(lotteryTicketModel: lotteryTicketA),
+              const SizedBox(height: 30,),
+              FoldingCardboardComponent(lotteryTicketModel: lotteryTicketA),
+              const SizedBox(height: 30,),
+              FoldingCardboardComponent(lotteryTicketModel: lotteryTicketA),
+            ],
           ),
-        );
+        ),
+      ),
+    );
   }
 }
