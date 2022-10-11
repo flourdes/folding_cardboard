@@ -136,7 +136,7 @@ class _FoldingCardboardComponentCustomState
               color: widget.backgroundColor,
             ),
             child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+              padding: widget.padding,//const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -195,7 +195,7 @@ class _FoldingCardboardComponentCustomState
                     maintainAnimation: false,
                     visible: _isVisible,
                     child: Padding(
-                      padding: const EdgeInsets.all(0),//const EdgeInsets.only(top: 10,left: 5,right: 10),
+                      padding:  EdgeInsets.only(top: widget.padding.vertical/3),//const EdgeInsets.only(top: 10,left: 5,right: 10),
                       child: Table(
                         children: carton,
                       ),

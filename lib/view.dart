@@ -59,12 +59,9 @@ class _ViewState extends State<View> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Padding(
-                padding: const EdgeInsets.all(20.0),
-                child: FoldingCardboardComponentCustom(
-                    lotteryTicketModel: lotteryTicket,
-                    padding: const EdgeInsets.all(20),
-                    ),
+              FoldingCardboardComponentCustom(
+                  lotteryTicketModel: lotteryTicket,
+                  padding: const EdgeInsets.all(20),
               ),
               const SizedBox(
                 height: 30,
@@ -82,18 +79,11 @@ class _ViewState extends State<View> {
                 child: FoldingCardboardComponentCustom(
                     lotteryTicketModel: lotteryTicket),
               ),
-              const SizedBox(
-                height: 30,
+              Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: FoldingCardboardComponentCustom(
+                    lotteryTicketModel: lotteryTicket),
               ),
-              FoldingCardboardComponent(lotteryTicketModel: lotteryTicket),
-              const SizedBox(
-                height: 30,
-              ),
-              FoldingCardboardComponent(lotteryTicketModel: lotteryTicket),
-              const SizedBox(
-                height: 30,
-              ),
-              FoldingCardboardComponent(lotteryTicketModel: lotteryTicket),
             ],
           ),
         ),
