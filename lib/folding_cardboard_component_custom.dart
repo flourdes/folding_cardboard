@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'models/lottery_ticket_model.dart';
 
 class FoldingCardboardComponentCustom extends StatefulWidget {
@@ -79,7 +78,7 @@ class _FoldingCardboardComponentCustomState
       height: sizeCell,
       margin: const EdgeInsets.all(5),//index%7 == 0 ? const EdgeInsets.only(right: 5) : const EdgeInsets.only(left: 5),
       decoration: BoxDecoration(
-          color: widget.cellColor,
+          color: widget.cellColor, //Colors.grey.shade200
           borderRadius: BorderRadius.circular(6),
           boxShadow: [
             BoxShadow(
@@ -94,7 +93,7 @@ class _FoldingCardboardComponentCustomState
         style: TextStyle(
           fontWeight: FontWeight.bold,
           fontSize: sizeNumber,
-          color: widget.cellText,
+          color: widget.cellText, //Colors.black54
         ),
       ),
     );
@@ -104,7 +103,7 @@ class _FoldingCardboardComponentCustomState
     if(index < widget.lotteryTicketModel.numberList.length){
       return widget.lotteryTicketModel.numberList[index].toString();
     }else{
-      return "-";
+      return "";
     }
   }
 

@@ -1,7 +1,5 @@
 import 'dart:math';
-
 import 'package:flutter/material.dart';
-import 'package:folding_cardboard/folding_cardboard_component.dart';
 import 'package:folding_cardboard/folding_cardboard_component_custom.dart';
 import 'models/lottery_ticket_model.dart';
 
@@ -48,7 +46,7 @@ class _ViewState extends State<View> {
       ),
       body: Container(
         decoration: const BoxDecoration(
-          color: Colors.grey,
+          color: Colors.grey, //Colors.white38
           gradient: LinearGradient(
             colors: [Colors.white,Colors.pink],
             begin: FractionalOffset.topCenter,
