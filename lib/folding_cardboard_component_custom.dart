@@ -129,11 +129,6 @@ class _FoldingCardboardComponentCustomState
 
   _expansionTable(
       carton, sizeCell, sizeText, sizeContainerMainNumber, sizeIcon) {
-    print((MediaQuery.of(context).size.width.toDouble() / 9 >= 52
-            ? 52
-            : (MediaQuery.of(context).size.width.toDouble() / 9) * 5) +
-        55);
-    print(sizeCell);
     return Container(
       decoration: BoxDecoration(
           borderRadius:
