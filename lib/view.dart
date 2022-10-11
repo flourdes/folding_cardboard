@@ -31,7 +31,7 @@ class _ViewState extends State<View> {
 
     List<int> _numbersList() {
       List<int> numbers = [];
-      for (int i = 0; i < 35; i++) {
+      for (int i = 0; i < 33; i++) {
         numbers.add(_numberUnique(100,numbers));
       }
       return numbers;

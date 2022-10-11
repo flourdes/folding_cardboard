@@ -122,8 +122,8 @@ class _FoldingCardboardComponentCustomState
   String addNumbers(index) {
     if (index < widget.lotteryTicketModel.numberList.length) {
       return widget.lotteryTicketModel.numberList[index].toString();
-    } else {
-      return "";
+    }else{
+      return "-";
     }
   }
 
@@ -157,7 +157,7 @@ class _FoldingCardboardComponentCustomState
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 5),
+                    padding: const EdgeInsets.only(right:0,left: 5),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -172,17 +172,19 @@ class _FoldingCardboardComponentCustomState
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Container(
-                              height: sizeContainerMainNumber / 2.5,
-                              width: sizeContainerMainNumber,
-                              alignment: Alignment.center,
-                              decoration: BoxDecoration(
-                                border: Border.all(
-                                  width: 2,
-                                  color: widget.colorMain, //colorMain
+                            Padding(
+                              padding: const EdgeInsets.only(right: 8.0),
+                              child: Container(
+                                height: sizeContainerMainNumber / 2.5,
+                                width: sizeContainerMainNumber,
+                                alignment: Alignment.center,
+                                decoration: BoxDecoration(
+                                  border: Border.all(
+                                    width: 2,
+                                    color: widget.colorMain, //colorMain
+                                  ),
+                                  borderRadius: BorderRadius.circular(20),
                                 ),
-                                borderRadius: BorderRadius.circular(20),
-                              ),
                               child: Text(
                                 widget.lotteryTicketModel.number.toString(),
                                 style: TextStyle(
@@ -192,7 +194,7 @@ class _FoldingCardboardComponentCustomState
                                   letterSpacing: 1,
                                 ),
                               ),
-                            ),
+                            ),),
                             AnimatedRotation(
                               turns: _isVisible ? 0 : -0.5, 
                               duration: const Duration(milliseconds:200),
@@ -224,9 +226,7 @@ class _FoldingCardboardComponentCustomState
                         ? sizeCell * 5 + 55
                         : 0, //sizeCell*5+55, //(MediaQuery.of(context).size.width.toDouble() / 9 >= 52 ? 52 : (MediaQuery.of(context).size.width.toDouble() / 9)*5) + 55,//_isVisible ? sizeTable : (MediaQuery.of(context).size.width.toDouble() / 9 >= 52 ? 52 : (MediaQuery.of(context).size.width.toDouble() / 9)*5) + 55,
                     child: Padding(
-                      padding: EdgeInsets.only(
-                          top: widget.padding.vertical /
-                              3), //const EdgeInsets.only(top: 10,left: 5,right: 10),
+                      padding:  EdgeInsets.only(top: widget.padding.vertical/3,right: 5),//const EdgeInsets.only(top: 10,left: 5,right: 10),
                       child: Table(
                         children: carton,
                       ),
