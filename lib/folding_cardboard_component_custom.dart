@@ -16,7 +16,7 @@ class FoldingCardboardComponentCustom extends StatefulWidget {
     required this.lotteryTicketModel,
     this.colorMain = const Color.fromARGB(255, 33, 82, 243),
     this.backgroundColor = Colors.white,
-    this.cellText = const Color.fromARGB(255, 125, 125, 125),
+    this.cellText = Colors.black54,
     this.cellColor = const Color.fromARGB(255, 239, 239, 239),
     this.padding = const EdgeInsets.all(8),
   }) : super(key: key);

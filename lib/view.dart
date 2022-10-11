@@ -59,7 +59,6 @@ class _ViewState extends State<View> {
             children: [
               FoldingCardboardComponentCustom(
                   lotteryTicketModel: lotteryTicket,
-                  padding: const EdgeInsets.all(20),
               ),
               const SizedBox(
                 height: 30,
@@ -67,7 +66,8 @@ class _ViewState extends State<View> {
               Padding(
                 padding: const EdgeInsets.all(20.0),
                 child: FoldingCardboardComponentCustom(
-                    lotteryTicketModel: lotteryTicket),
+                    lotteryTicketModel: lotteryTicket,
+                  padding: const EdgeInsets.all(20),)
               ),
               const SizedBox(
                 height: 30,
