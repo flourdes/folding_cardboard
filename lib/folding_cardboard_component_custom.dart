@@ -31,28 +31,9 @@ class FoldingCardboardComponentCustom extends StatefulWidget {
 }
 
 class _FoldingCardboardComponentCustomState
-    extends State<FoldingCardboardComponentCustom>
-    with SingleTickerProviderStateMixin {
+    extends State<FoldingCardboardComponentCustom> {
   bool _isVisible = false;
   double sizeTable = 0;
-
-  late AnimationController _controller;
-
-  @override
-  void initState() {
-    super.initState();
-    _controller = AnimationController(
-      vsync: this,
-      duration: const Duration(milliseconds: 200),
-      upperBound: 0.5,
-    );
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-    _controller.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -78,13 +59,11 @@ class _FoldingCardboardComponentCustomState
   void onTap() {
     setState(() {
       if (!_isVisible) {
-        _controller.reverse(from: 0.5);
         sizeTable = (MediaQuery.of(context).size.width.toDouble() / 9 >= 52
                 ? 52
                 : (MediaQuery.of(context).size.width.toDouble() / 9) * 5) +
             55;
       } else {
-        _controller.forward(from: 0.0);
         sizeTable = 0;
       }
       _isVisible = !_isVisible;
@@ -122,7 +101,7 @@ class _FoldingCardboardComponentCustomState
   String addNumbers(index) {
     if (index < widget.lotteryTicketModel.numberList.length) {
       return widget.lotteryTicketModel.numberList[index].toString();
-    }else{
+    } else {
       return "-";
     }
   }
@@ -157,7 +136,7 @@ class _FoldingCardboardComponentCustomState
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.only(right:0,left: 5),
+                    padding: const EdgeInsets.only(right: 0, left: 5),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -185,35 +164,26 @@ class _FoldingCardboardComponentCustomState
                                   ),
                                   borderRadius: BorderRadius.circular(20),
                                 ),
-                              child: Text(
-                                widget.lotteryTicketModel.number.toString(),
-                                style: TextStyle(
-                                  color: widget.colorMain, //colorMain
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: sizeText / 1.15,
-                                  letterSpacing: 1,
+                                child: Text(
+                                  widget.lotteryTicketModel.number.toString(),
+                                  style: TextStyle(
+                                    color: widget.colorMain, //colorMain
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: sizeText / 1.15,
+                                    letterSpacing: 1,
+                                  ),
                                 ),
                               ),
-                            ),),
+                            ),
                             AnimatedRotation(
-                              turns: _isVisible ? 0 : -0.5, 
-                              duration: const Duration(milliseconds:200),
-                              child: Icon(
-                                Icons.arrow_drop_down,
-                                size: sizeIcon,
-                                color: widget.colorMain,
-                              ),),
-                              /*
-                            RotationTransition(
-                              turns: Tween(begin: 0.0, end: 1.0)
-                                  .animate(_controller),
+                              turns: _isVisible ? -0.5 : 0,
+                              duration: const Duration(milliseconds: 200),
                               child: Icon(
                                 Icons.arrow_drop_down,
                                 size: sizeIcon,
                                 color: widget.colorMain,
                               ),
                             ),
-                            */
                           ],
                         ),
                       ],
@@ -226,7 +196,10 @@ class _FoldingCardboardComponentCustomState
                         ? sizeCell * 5 + 55
                         : 0, //sizeCell*5+55, //(MediaQuery.of(context).size.width.toDouble() / 9 >= 52 ? 52 : (MediaQuery.of(context).size.width.toDouble() / 9)*5) + 55,//_isVisible ? sizeTable : (MediaQuery.of(context).size.width.toDouble() / 9 >= 52 ? 52 : (MediaQuery.of(context).size.width.toDouble() / 9)*5) + 55,
                     child: Padding(
-                      padding:  EdgeInsets.only(top: widget.padding.vertical/3,right: 5),//const EdgeInsets.only(top: 10,left: 5,right: 10),
+                      padding: EdgeInsets.only(
+                          top: widget.padding.vertical / 3,
+                          right:
+                              5), //const EdgeInsets.only(top: 10,left: 5,right: 10),
                       child: Table(
                         children: carton,
                       ),

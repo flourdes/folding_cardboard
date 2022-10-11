@@ -38,8 +38,13 @@ class _ViewState extends State<View> {
     }
 
     LotteryTicketModel lotteryTicket =
-        LotteryTicketModel(number: 109870, numberList: _numbersList());
-        
+        LotteryTicketModel(number: 106044, numberList: _numbersList());
+    LotteryTicketModel lotteryTicketB =
+        LotteryTicketModel(number: 106040, numberList: _numbersList());
+    LotteryTicketModel lotteryTicketC =
+        LotteryTicketModel(number: 109033, numberList: _numbersList());
+    LotteryTicketModel lotteryTicketD =
+        LotteryTicketModel(number: 102099, numberList: _numbersList());
     return Scaffold(
       appBar: AppBar(
         title: const Text("Bingooo"),
@@ -64,23 +69,32 @@ class _ViewState extends State<View> {
                 height: 30,
               ),
               Padding(
-                padding: const EdgeInsets.all(20.0),
+                padding: const EdgeInsets.all(12.0),
                 child: FoldingCardboardComponentCustom(
-                    lotteryTicketModel: lotteryTicket,
-                  padding: const EdgeInsets.all(20),)
+                    lotteryTicketModel: lotteryTicketB,)
               ),
               const SizedBox(
                 height: 30,
               ),
               Padding(
-                padding: const EdgeInsets.all(20.0),
+                padding: const EdgeInsets.all(12.0),
                 child: FoldingCardboardComponentCustom(
-                    lotteryTicketModel: lotteryTicket),
+                    lotteryTicketModel: lotteryTicketC,
+                    padding: const EdgeInsets.all(20),),
               ),
               Padding(
-                padding: const EdgeInsets.all(20.0),
+                padding: const EdgeInsets.all(12.0),
                 child: FoldingCardboardComponentCustom(
-                    lotteryTicketModel: lotteryTicket),
+                    lotteryTicketModel: lotteryTicketD,
+                    backgroundColor: Colors.blueAccent,
+                    borderRadiusCircularCardBoard: 24,
+                    borderRadiusCircularCell: 12,
+                    cellColor: Colors.black,
+                    cellText: Colors.white,
+                    colorMain: Colors.white,
+                    title: "Otro titulo para la tarjeta",
+                    padding: const EdgeInsets.all(12),
+                ),
               ),
             ],
           ),
