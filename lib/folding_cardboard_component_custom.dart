@@ -7,7 +7,6 @@ class FoldingCardboardComponentCustom extends StatefulWidget {
   final Color cellColor;
   final Color cellText;
   final String title;
-  double animation = 0;
   final LotteryTicketModel lotteryTicketModel;
   final EdgeInsetsGeometry padding;
 
@@ -31,13 +30,13 @@ class _FoldingCardboardComponentCustomState
     extends State<FoldingCardboardComponentCustom>
     with SingleTickerProviderStateMixin {
   bool _isVisible = false;
+  double animation = 0;
 
   late AnimationController _controller;
 
   @override
   void initState() {
     super.initState();
-
     _controller = AnimationController(
       vsync: this,
       duration: const Duration(milliseconds: 200),
@@ -53,26 +52,27 @@ class _FoldingCardboardComponentCustomState
 
   @override
   Widget build(BuildContext context) {
+
     final double size = MediaQuery.of(context).size.width.toDouble();
     late final double sizeCell = size / 9 >= 52? 52 : size / 9;
     late final double sizeNumber = size / 9 >= 52? 19.5 : size / 24;
     List<TableRow> carton = List.generate(
         5,(indexCol) => TableRow(children: List.generate(
         7,(indexRow) => _cell(indexCol*7+indexRow,sizeCell,sizeNumber))));
-    return _expansionTable(carton,sizeCell);
+    return _expansionTable(carton);
   }
 
-  onTap(sizeCell) {
+  void onTap() {
     setState(() {
       if (!_isVisible) {
         _controller.reverse(from: 0.5);
-        widget.animation = 320;//((sizeCell*5)+50);
-      } else {
+        animation = 320;//((sizeCell*5)+50);
+      }
+      else {
         _controller.forward(from: 0.0);
-        widget.animation = 0;
+        animation = 0;
       }
       _isVisible = !_isVisible;
-      print("hi");
     });
   }
 
@@ -111,14 +111,11 @@ class _FoldingCardboardComponentCustomState
     }
   }
 
-  _expansionTable(carton,sizeCell) {
+  _expansionTable(carton) {
     final double size = MediaQuery.of(context).size.width;
     late final double sizeText = size / 9 >= 52? 19.5 : size / 24;
     late final double sizeContainerMainNumber = size / 5.2 >= 90 ? 90 : size / 5.2;
     late final double sizeIcon = size / 10.4 >= 45 ? 45 : size / 10.4;
-    print({size / 9});
-    print({size / 5.2});
-    print({sizeIcon});
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
@@ -130,7 +127,7 @@ class _FoldingCardboardComponentCustomState
         ),
       ]),
       child: GestureDetector(
-        onTap: onTap(sizeCell),
+        onTap: onTap,
         child: ClipRRect(
           borderRadius: BorderRadius.circular(20),
           child: Container(
@@ -195,8 +192,9 @@ class _FoldingCardboardComponentCustomState
                     ),
                   ),
                   AnimatedContainer(
-                    duration: Duration(milliseconds: 400),
-                    height: widget.animation,
+                    duration: const Duration(milliseconds: 200),
+                    curve: Curves.linear,
+                    height: animation,
                     child: Padding(
                       padding:  EdgeInsets.only(top: widget.padding.vertical/3),//const EdgeInsets.only(top: 10,left: 5,right: 10),
                       child: Table(
