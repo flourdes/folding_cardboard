@@ -9,6 +9,7 @@ class FoldingCardboardComponentCustom extends StatefulWidget {
   final Color cellText;
   final String title;
   final LotteryTicketModel lotteryTicketModel;
+  final EdgeInsetsGeometry padding;
 
   const FoldingCardboardComponentCustom({
     Key? key,
@@ -18,6 +19,7 @@ class FoldingCardboardComponentCustom extends StatefulWidget {
     this.backgroundColor = Colors.white,
     this.cellText = const Color.fromARGB(255, 125, 125, 125),
     this.cellColor = const Color.fromARGB(255, 239, 239, 239),
+    this.padding = const EdgeInsets.all(8),
   }) : super(key: key);
 
   @override
@@ -53,7 +55,7 @@ class _FoldingCardboardComponentCustomState
   Widget build(BuildContext context) {
     List<TableRow> carton = List.generate(
         5,(indexCol) => TableRow(children: List.generate(
-        7,(indexRow) => _numbers(indexCol*7+indexRow))));
+        7,(indexRow) => _cell(indexCol*7+indexRow))));
     return _expansionTable(carton);
   }
 
@@ -68,14 +70,17 @@ class _FoldingCardboardComponentCustomState
     });
   }
 
-  _numbers(index){
+  _cell(index){
+    final double size = MediaQuery.of(context).size.width.toDouble();
+    late final double sizeCell = size / 9 >= 52? 52 : size / 9;
+    late final double sizeNumber = size / 9 >= 52? 19.5 : size / 24;
     return Container(
-      width: MediaQuery.of(context).size.width / 9,
-      height: MediaQuery.of(context).size.width / 9,
-      margin: const EdgeInsets.all(5),
+      width: sizeCell,
+      height: sizeCell,
+      margin: const EdgeInsets.all(5),//index%7 == 0 ? const EdgeInsets.only(right: 5) : const EdgeInsets.only(left: 5),
       decoration: BoxDecoration(
           color: widget.cellColor,
-          borderRadius: BorderRadius.circular(9),
+          borderRadius: BorderRadius.circular(6),
           boxShadow: [
             BoxShadow(
               color: widget.cellColor.withOpacity(0.9),
@@ -88,7 +93,7 @@ class _FoldingCardboardComponentCustomState
         addNumbers(index),
         style: TextStyle(
           fontWeight: FontWeight.bold,
-          fontSize: 14,
+          fontSize: sizeNumber,
           color: widget.cellText,
         ),
       ),
@@ -104,13 +109,21 @@ class _FoldingCardboardComponentCustomState
   }
 
   _expansionTable(carton) {
+    final double size = MediaQuery.of(context).size.width;
+    late final double sizeText = size / 9 >= 52? 19.5 : size / 24;
+    late final double sizeContainerMainNumber = size / 5.2 >= 90 ? 90 : size / 5.2;
+    late final double sizeIcon = size / 10.4 >= 45 ? 45 : size / 10.4;
+    print({size / 9});
+    print({size / 5.2});
+    print({sizeIcon});
     return Container(
-      decoration: BoxDecoration(boxShadow: [
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(20),
+        boxShadow: [
         BoxShadow(
-          color: Colors.blue.withOpacity(0.8),
-          spreadRadius: 2,
-          blurRadius: 9,
-          offset: const Offset(0, 0),
+          color: Colors.black.withOpacity(0.5),
+          blurRadius: 10,
+          offset: const Offset(0, 10),
         ),
       ]),
       child: GestureDetector(
@@ -123,19 +136,19 @@ class _FoldingCardboardComponentCustomState
               color: widget.backgroundColor,
             ),
             child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 15),
+              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.only(left: 10),
+                    padding: const EdgeInsets.symmetric(horizontal: 5),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          "Número de cartón",
+                          widget.title,
                           style: TextStyle(
-                            fontSize: 16,
+                            fontSize: sizeText,
                             fontWeight: FontWeight.w500,
                             color: widget.colorMain, //colorMain
                           ),
@@ -144,8 +157,8 @@ class _FoldingCardboardComponentCustomState
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Container(
-                              height: 34,
-                              width: 90,
+                              height: sizeContainerMainNumber / 2.5,
+                              width: sizeContainerMainNumber,
                               alignment: Alignment.center,
                               decoration: BoxDecoration(
                                 border: Border.all(
@@ -159,6 +172,7 @@ class _FoldingCardboardComponentCustomState
                                 style: TextStyle(
                                   color: widget.colorMain, //colorMain
                                   fontWeight: FontWeight.w600,
+                                  fontSize: sizeText/1.15,
                                   letterSpacing: 1,
                                 ),
                               ),
@@ -168,7 +182,7 @@ class _FoldingCardboardComponentCustomState
                                   .animate(_controller),
                               child: Icon(
                                 Icons.arrow_drop_down,
-                                size: 36,
+                                size: sizeIcon,
                                 color: widget.colorMain,
                               ),
                             ),
@@ -181,7 +195,7 @@ class _FoldingCardboardComponentCustomState
                     maintainAnimation: false,
                     visible: _isVisible,
                     child: Padding(
-                      padding: const EdgeInsets.only(top: 10,left: 5,right: 10),
+                      padding: const EdgeInsets.all(0),//const EdgeInsets.only(top: 10,left: 5,right: 10),
                       child: Table(
                         children: carton,
                       ),

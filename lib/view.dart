@@ -16,22 +16,45 @@ class View extends StatefulWidget {
 class _ViewState extends State<View> {
   @override
   Widget build(BuildContext context) {
-    _numbersList() {
+    Random rnd = Random();
+
+    int _numberUnique(int limit, List<int> numbers) {
+    bool flag = false;
+    int random = 0;
+    if (numbers.isEmpty) {
+      return rnd.nextInt(limit) + 1;
+    }
+    while (!flag) {
+      random = rnd.nextInt(limit) + 1;
+      flag = !numbers.contains(random);
+    }
+    return random;
+    }
+
+    List<int> _numbersList() {
       List<int> numbers = [];
-      for (int i = 0; i < 30; i++) {
-        numbers.add(Random().nextInt(90));
+      for (int i = 0; i < 35; i++) {
+        numbers.add(_numberUnique(100,numbers));
       }
       return numbers;
     }
 
     LotteryTicketModel lotteryTicket =
         LotteryTicketModel(number: 109870, numberList: _numbersList());
+        
     return Scaffold(
       appBar: AppBar(
         title: const Text("Bingooo"),
       ),
       body: Container(
-        color: Colors.grey,
+        decoration: const BoxDecoration(
+          color: Colors.grey,
+          gradient: LinearGradient(
+            colors: [Colors.white,Colors.pink],
+            begin: FractionalOffset.topCenter,
+            end: FractionalOffset.bottomCenter,
+          )
+        ),
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -39,7 +62,9 @@ class _ViewState extends State<View> {
               Padding(
                 padding: const EdgeInsets.all(20.0),
                 child: FoldingCardboardComponentCustom(
-                    lotteryTicketModel: lotteryTicket),
+                    lotteryTicketModel: lotteryTicket,
+                    padding: const EdgeInsets.all(20),
+                    ),
               ),
               const SizedBox(
                 height: 30,
