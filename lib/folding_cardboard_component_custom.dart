@@ -9,8 +9,10 @@ class FoldingCardboardComponentCustom extends StatefulWidget {
   final String title;
   final LotteryTicketModel lotteryTicketModel;
   final EdgeInsetsGeometry padding;
+  final double borderRadiusCircularCardBoard;
+  final double borderRadiusCircularCell;
 
-  FoldingCardboardComponentCustom({
+  const FoldingCardboardComponentCustom({
     Key? key,
     this.title = "Número de cartón",
     required this.lotteryTicketModel,
@@ -19,6 +21,8 @@ class FoldingCardboardComponentCustom extends StatefulWidget {
     this.cellText = Colors.black54,
     this.cellColor = const Color.fromARGB(255, 239, 239, 239),
     this.padding = const EdgeInsets.all(8),
+    this.borderRadiusCircularCardBoard = 12,
+    this.borderRadiusCircularCell = 6,
   }) : super(key: key);
 
   @override
@@ -30,7 +34,7 @@ class _FoldingCardboardComponentCustomState
     extends State<FoldingCardboardComponentCustom>
     with SingleTickerProviderStateMixin {
   bool _isVisible = false;
-  double animation = 0;
+  double sizeTable = 0;
 
   late AnimationController _controller;
 
@@ -52,38 +56,50 @@ class _FoldingCardboardComponentCustomState
 
   @override
   Widget build(BuildContext context) {
-
     final double size = MediaQuery.of(context).size.width.toDouble();
-    late final double sizeCell = size / 9 >= 52? 52 : size / 9;
-    late final double sizeNumber = size / 9 >= 52? 19.5 : size / 24;
+    late final double sizeCell = size / 9 >= 52 ? 52 : size / 9;
+    late final double sizeNumber = size / 9 >= 52 ? 19.5 : size / 24;
+    late final double sizeText = size / 9 >= 52 ? 19.5 : size / 24;
+    late final double sizeContainerMainNumber =
+        size / 5.2 >= 90 ? 90 : size / 5.2;
+    late final double sizeIcon = size / 10.4 >= 45 ? 45 : size / 10.4;
+
     List<TableRow> carton = List.generate(
-        5,(indexCol) => TableRow(children: List.generate(
-        7,(indexRow) => _cell(indexCol*7+indexRow,sizeCell,sizeNumber))));
-    return _expansionTable(carton);
+        5,
+        (indexCol) => TableRow(
+            children: List.generate(
+                7,
+                (indexRow) =>
+                    _cell(indexCol * 7 + indexRow, sizeCell, sizeNumber))));
+    return _expansionTable(
+        carton, sizeCell, sizeText, sizeContainerMainNumber, sizeIcon);
   }
 
   void onTap() {
     setState(() {
       if (!_isVisible) {
         _controller.reverse(from: 0.5);
-        animation = 320;//((sizeCell*5)+50);
-      }
-      else {
+        sizeTable = (MediaQuery.of(context).size.width.toDouble() / 9 >= 52
+                ? 52
+                : (MediaQuery.of(context).size.width.toDouble() / 9) * 5) +
+            55;
+      } else {
         _controller.forward(from: 0.0);
-        animation = 0;
+        sizeTable = 0;
       }
       _isVisible = !_isVisible;
     });
   }
 
-  _cell(index,sizeCell,sizeNumber){
+  _cell(index, sizeCell, sizeNumber) {
     return Container(
       width: sizeCell,
       height: sizeCell,
-      margin: const EdgeInsets.all(5),//index%7 == 0 ? const EdgeInsets.only(right: 5) : const EdgeInsets.only(left: 5),
+      margin: const EdgeInsets.all(
+          5), //index%7 == 0 ? const EdgeInsets.only(right: 5) : const EdgeInsets.only(left: 5),
       decoration: BoxDecoration(
           color: widget.cellColor, //Colors.grey.shade200
-          borderRadius: BorderRadius.circular(6),
+          borderRadius: BorderRadius.circular(widget.borderRadiusCircularCell),
           boxShadow: [
             BoxShadow(
               color: widget.cellColor.withOpacity(0.9),
@@ -103,40 +119,45 @@ class _FoldingCardboardComponentCustomState
     );
   }
 
-  String addNumbers(index){
-    if(index < widget.lotteryTicketModel.numberList.length){
+  String addNumbers(index) {
+    if (index < widget.lotteryTicketModel.numberList.length) {
       return widget.lotteryTicketModel.numberList[index].toString();
-    }else{
+    } else {
       return "";
     }
   }
 
-  _expansionTable(carton) {
-    final double size = MediaQuery.of(context).size.width;
-    late final double sizeText = size / 9 >= 52? 19.5 : size / 24;
-    late final double sizeContainerMainNumber = size / 5.2 >= 90 ? 90 : size / 5.2;
-    late final double sizeIcon = size / 10.4 >= 45 ? 45 : size / 10.4;
+  _expansionTable(
+      carton, sizeCell, sizeText, sizeContainerMainNumber, sizeIcon) {
+    print((MediaQuery.of(context).size.width.toDouble() / 9 >= 52
+            ? 52
+            : (MediaQuery.of(context).size.width.toDouble() / 9) * 5) +
+        55);
+    print(sizeCell);
     return Container(
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(20),
-        boxShadow: [
-        BoxShadow(
-          color: Colors.black.withOpacity(0.5),
-          blurRadius: 10,
-          offset: const Offset(0, 10),
-        ),
-      ]),
+          borderRadius:
+              BorderRadius.circular(widget.borderRadiusCircularCardBoard),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.5),
+              blurRadius: 10,
+              offset: const Offset(0, 10),
+            ),
+          ]),
       child: GestureDetector(
         onTap: onTap,
         child: ClipRRect(
-          borderRadius: BorderRadius.circular(20),
+          borderRadius:
+              BorderRadius.circular(widget.borderRadiusCircularCardBoard),
           child: Container(
             width: double.infinity,
             decoration: BoxDecoration(
               color: widget.backgroundColor,
             ),
             child: Padding(
-              padding: widget.padding,//const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+              padding: widget
+                  .padding, //const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -172,11 +193,20 @@ class _FoldingCardboardComponentCustomState
                                 style: TextStyle(
                                   color: widget.colorMain, //colorMain
                                   fontWeight: FontWeight.w600,
-                                  fontSize: sizeText/1.15,
+                                  fontSize: sizeText / 1.15,
                                   letterSpacing: 1,
                                 ),
                               ),
                             ),
+                            AnimatedRotation(
+                              turns: _isVisible ? 0 : -0.5, 
+                              duration: const Duration(milliseconds:200),
+                              child: Icon(
+                                Icons.arrow_drop_down,
+                                size: sizeIcon,
+                                color: widget.colorMain,
+                              ),),
+                              /*
                             RotationTransition(
                               turns: Tween(begin: 0.0, end: 1.0)
                                   .animate(_controller),
@@ -186,6 +216,7 @@ class _FoldingCardboardComponentCustomState
                                 color: widget.colorMain,
                               ),
                             ),
+                            */
                           ],
                         ),
                       ],
@@ -194,9 +225,13 @@ class _FoldingCardboardComponentCustomState
                   AnimatedContainer(
                     duration: const Duration(milliseconds: 200),
                     curve: Curves.linear,
-                    height: animation,
+                    height: _isVisible
+                        ? sizeCell * 5 + 55
+                        : 0, //sizeCell*5+55, //(MediaQuery.of(context).size.width.toDouble() / 9 >= 52 ? 52 : (MediaQuery.of(context).size.width.toDouble() / 9)*5) + 55,//_isVisible ? sizeTable : (MediaQuery.of(context).size.width.toDouble() / 9 >= 52 ? 52 : (MediaQuery.of(context).size.width.toDouble() / 9)*5) + 55,
                     child: Padding(
-                      padding:  EdgeInsets.only(top: widget.padding.vertical/3),//const EdgeInsets.only(top: 10,left: 5,right: 10),
+                      padding: EdgeInsets.only(
+                          top: widget.padding.vertical /
+                              3), //const EdgeInsets.only(top: 10,left: 5,right: 10),
                       child: Table(
                         children: carton,
                       ),
