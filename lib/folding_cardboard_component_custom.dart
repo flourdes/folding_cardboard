@@ -7,10 +7,11 @@ class FoldingCardboardComponentCustom extends StatefulWidget {
   final Color cellColor;
   final Color cellText;
   final String title;
+  double animation = 0;
   final LotteryTicketModel lotteryTicketModel;
   final EdgeInsetsGeometry padding;
 
-  const FoldingCardboardComponentCustom({
+  FoldingCardboardComponentCustom({
     Key? key,
     this.title = "Número de cartón",
     required this.lotteryTicketModel,
@@ -52,27 +53,30 @@ class _FoldingCardboardComponentCustomState
 
   @override
   Widget build(BuildContext context) {
-    List<TableRow> carton = List.generate(
-        5,(indexCol) => TableRow(children: List.generate(
-        7,(indexRow) => _cell(indexCol*7+indexRow))));
-    return _expansionTable(carton);
-  }
-
-  void _onTap() {
-    setState(() {
-      if (_isVisible) {
-        _controller.reverse(from: 0.5);
-      } else {
-        _controller.forward(from: 0.0);
-      }
-      _isVisible = !_isVisible;
-    });
-  }
-
-  _cell(index){
     final double size = MediaQuery.of(context).size.width.toDouble();
     late final double sizeCell = size / 9 >= 52? 52 : size / 9;
     late final double sizeNumber = size / 9 >= 52? 19.5 : size / 24;
+    List<TableRow> carton = List.generate(
+        5,(indexCol) => TableRow(children: List.generate(
+        7,(indexRow) => _cell(indexCol*7+indexRow,sizeCell,sizeNumber))));
+    return _expansionTable(carton,sizeCell);
+  }
+
+  onTap(sizeCell) {
+    setState(() {
+      if (!_isVisible) {
+        _controller.reverse(from: 0.5);
+        widget.animation = 320;//((sizeCell*5)+50);
+      } else {
+        _controller.forward(from: 0.0);
+        widget.animation = 0;
+      }
+      _isVisible = !_isVisible;
+      print("hi");
+    });
+  }
+
+  _cell(index,sizeCell,sizeNumber){
     return Container(
       width: sizeCell,
       height: sizeCell,
@@ -107,7 +111,7 @@ class _FoldingCardboardComponentCustomState
     }
   }
 
-  _expansionTable(carton) {
+  _expansionTable(carton,sizeCell) {
     final double size = MediaQuery.of(context).size.width;
     late final double sizeText = size / 9 >= 52? 19.5 : size / 24;
     late final double sizeContainerMainNumber = size / 5.2 >= 90 ? 90 : size / 5.2;
@@ -126,7 +130,7 @@ class _FoldingCardboardComponentCustomState
         ),
       ]),
       child: GestureDetector(
-        onTap: _onTap,
+        onTap: onTap(sizeCell),
         child: ClipRRect(
           borderRadius: BorderRadius.circular(20),
           child: Container(
@@ -190,9 +194,9 @@ class _FoldingCardboardComponentCustomState
                       ],
                     ),
                   ),
-                  Visibility(
-                    maintainAnimation: false,
-                    visible: _isVisible,
+                  AnimatedContainer(
+                    duration: Duration(milliseconds: 400),
+                    height: widget.animation,
                     child: Padding(
                       padding:  EdgeInsets.only(top: widget.padding.vertical/3),//const EdgeInsets.only(top: 10,left: 5,right: 10),
                       child: Table(
