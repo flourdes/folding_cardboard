@@ -48,7 +48,7 @@ class _ViewState extends State<View> {
         decoration: const BoxDecoration(
           color: Colors.grey, //Colors.white38
           gradient: LinearGradient(
-            colors: [Colors.white,Colors.pink],
+            colors: [Colors.pink,Colors.white],
             begin: FractionalOffset.topCenter,
             end: FractionalOffset.bottomCenter,
           )
