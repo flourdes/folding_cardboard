@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'models/lottery_ticket_model.dart';
 
 class FoldingCardboardComponentCustom extends StatefulWidget {
@@ -74,22 +73,16 @@ class _FoldingCardboardComponentCustomState
       height: MediaQuery.of(context).size.width / 9,
       margin: const EdgeInsets.all(5),
       decoration: BoxDecoration(
-          color: widget.cellColor,
+          color: Colors.grey.shade200,
           borderRadius: BorderRadius.circular(9),
-          boxShadow: [
-            BoxShadow(
-              color: widget.cellColor.withOpacity(0.9),
-              blurRadius: 2,
-              offset: const Offset(3.5, 3.5),
-            ),
-          ]),
+          ),
       alignment: Alignment.center,
       child: Text(
         addNumbers(index),
         style: TextStyle(
           fontWeight: FontWeight.bold,
           fontSize: 14,
-          color: widget.cellText,
+          color: Colors.black54,
         ),
       ),
     );
@@ -99,7 +92,7 @@ class _FoldingCardboardComponentCustomState
     if(index < widget.lotteryTicketModel.numberList.length){
       return widget.lotteryTicketModel.numberList[index].toString();
     }else{
-      return "-";
+      return "";
     }
   }
 
@@ -107,7 +100,7 @@ class _FoldingCardboardComponentCustomState
     return Container(
       decoration: BoxDecoration(boxShadow: [
         BoxShadow(
-          color: Colors.blue.withOpacity(0.8),
+          color: Colors.grey.withOpacity(0.5),
           spreadRadius: 2,
           blurRadius: 9,
           offset: const Offset(0, 0),
@@ -143,23 +136,27 @@ class _FoldingCardboardComponentCustomState
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Container(
-                              height: 34,
-                              width: 90,
-                              alignment: Alignment.center,
-                              decoration: BoxDecoration(
-                                border: Border.all(
-                                  width: 2,
-                                  color: widget.colorMain, //colorMain
+                            Padding(
+                              padding: const EdgeInsets.only(right: 8),
+                              child: Container(
+                                height: 34,
+                                width: 90,
+                                alignment: Alignment.center,
+                                decoration: BoxDecoration(
+                                  border: Border.all(
+                                    width: 2,
+                                    color: widget.colorMain, //colorMain
+                                  ),
+                                  borderRadius: BorderRadius.circular(20),
                                 ),
-                                borderRadius: BorderRadius.circular(20),
-                              ),
-                              child: Text(
-                                widget.lotteryTicketModel.number.toString(),
-                                style: TextStyle(
-                                  color: widget.colorMain, //colorMain
-                                  fontWeight: FontWeight.w600,
-                                  letterSpacing: 1,
+                                child: Text(
+                                  widget.lotteryTicketModel.number.toString(),
+                                  style: TextStyle(
+                                    fontSize: 15,
+                                    color: widget.colorMain, //colorMain
+                                    fontWeight: FontWeight.w600,
+                                    letterSpacing: 1,
+                                  ),
                                 ),
                               ),
                             ),

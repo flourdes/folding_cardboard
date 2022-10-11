@@ -31,7 +31,7 @@ class _ViewState extends State<View> {
         title: const Text("Bingooo"),
       ),
       body: Container(
-        color: Colors.grey,
+        color: Colors.white38,
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
