@@ -45,7 +45,7 @@ class _FoldingCardboardComponentCustomState
         size / 5.2 >= 90 ? 90 : size / 5.2;
     late final double sizeIcon = size / 10.4 >= 45 ? 45 : size / 10.4;
 
-    List<TableRow> carton = List.generate(
+    List<TableRow> cardboard = List.generate(
         5,
         (indexCol) => TableRow(
             children: List.generate(
@@ -53,7 +53,7 @@ class _FoldingCardboardComponentCustomState
                 (indexRow) =>
                     _cell(indexCol * 7 + indexRow, sizeCell, sizeNumber))));
     return _expansionTable(
-        carton, sizeCell, sizeText, sizeContainerMainNumber, sizeIcon);
+        cardboard, sizeCell, sizeText, sizeContainerMainNumber, sizeIcon);
   }
 
   void onTap() {
@@ -107,7 +107,7 @@ class _FoldingCardboardComponentCustomState
   }
 
   _expansionTable(
-      carton, sizeCell, sizeText, sizeContainerMainNumber, sizeIcon) {
+      cardboard, sizeCell, sizeText, sizeContainerMainNumber, sizeIcon) {
     return Container(
       decoration: BoxDecoration(
           borderRadius:
@@ -130,8 +130,7 @@ class _FoldingCardboardComponentCustomState
               color: widget.backgroundColor,
             ),
             child: Padding(
-              padding: widget
-                  .padding, //const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+              padding: widget.padding, //const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -177,7 +176,7 @@ class _FoldingCardboardComponentCustomState
                             ),
                             AnimatedRotation(
                               turns: _isOpen ? -0.5 : 0,
-                              duration: const Duration(milliseconds: 200),
+                              duration: const Duration(milliseconds: 250),
                               child: Icon(
                                 Icons.arrow_drop_down,
                                 size: sizeIcon,
@@ -190,7 +189,7 @@ class _FoldingCardboardComponentCustomState
                     ),
                   ),
                   AnimatedContainer(
-                    duration: const Duration(milliseconds: 200),
+                    duration: const Duration(milliseconds: 250),
                     curve: Curves.linear,
                     height: _isOpen
                         ? sizeCell * 5 + 55
@@ -201,7 +200,7 @@ class _FoldingCardboardComponentCustomState
                           right:
                               5), //const EdgeInsets.only(top: 10,left: 5,right: 10),
                       child: Table(
-                        children: carton,
+                        children: cardboard,
                       ),
                     ),
                   )
