@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'models/lottery_ticket_model.dart';
+import 'models/bingo_ticket_model.dart';
 
 class FoldingCardboardComponent extends StatefulWidget {
   final String id = "folding_cardboard_component";
   final Color color;
   final String title;
-  final LotteryTicketModel lotteryTicketModel;
+  final BingoTicketModel lotteryTicketModel;
   const FoldingCardboardComponent(
       {super.key,
       this.title = "Número de cartón",

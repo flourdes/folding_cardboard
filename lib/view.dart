@@ -1,7 +1,7 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:folding_cardboard/folding_cardboard_component_custom.dart';
-import 'models/lottery_ticket_model.dart';
+import 'models/bingo_ticket_model.dart';
 
 class View extends StatefulWidget {
   final String id = "view";
@@ -37,14 +37,14 @@ class _ViewState extends State<View> {
       return numbers;
     }
 
-    LotteryTicketModel lotteryTicket =
-        LotteryTicketModel(number: 106044, numberList: _numbersList());
-    LotteryTicketModel lotteryTicketB =
-        LotteryTicketModel(number: 106040, numberList: _numbersList());
-    LotteryTicketModel lotteryTicketC =
-        LotteryTicketModel(number: 109033, numberList: _numbersList());
-    LotteryTicketModel lotteryTicketD =
-        LotteryTicketModel(number: 102099, numberList: _numbersList());
+    BingoTicketModel lotteryTicket =
+        BingoTicketModel(number: 106044, numberList: _numbersList());
+    BingoTicketModel lotteryTicketB =
+        BingoTicketModel(number: 106040, numberList: _numbersList());
+    BingoTicketModel lotteryTicketC =
+        BingoTicketModel(number: 109033, numberList: _numbersList());
+    BingoTicketModel lotteryTicketD =
+        BingoTicketModel(number: 102099, numberList: _numbersList());
     return Scaffold(
       appBar: AppBar(
         title: const Text("Bingooo"),
@@ -63,7 +63,7 @@ class _ViewState extends State<View> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               FoldingCardboardComponentCustom(
-                  lotteryTicketModel: lotteryTicket,
+                  bingoTicketModel: lotteryTicket,
               ),
               const SizedBox(
                 height: 30,
@@ -71,7 +71,7 @@ class _ViewState extends State<View> {
               Padding(
                 padding: const EdgeInsets.all(12.0),
                 child: FoldingCardboardComponentCustom(
-                    lotteryTicketModel: lotteryTicketB,)
+                    bingoTicketModel: lotteryTicketB,)
               ),
               const SizedBox(
                 height: 30,
@@ -79,13 +79,13 @@ class _ViewState extends State<View> {
               Padding(
                 padding: const EdgeInsets.all(12.0),
                 child: FoldingCardboardComponentCustom(
-                    lotteryTicketModel: lotteryTicketC,
+                    bingoTicketModel: lotteryTicketC,
                     padding: const EdgeInsets.all(20),),
               ),
               Padding(
                 padding: const EdgeInsets.all(12.0),
                 child: FoldingCardboardComponentCustom(
-                    lotteryTicketModel: lotteryTicketD,
+                    bingoTicketModel: lotteryTicketD,
                     backgroundColor: Colors.blueAccent,
                     borderRadiusCircularCardBoard: 24,
                     borderRadiusCircularCell: 12,

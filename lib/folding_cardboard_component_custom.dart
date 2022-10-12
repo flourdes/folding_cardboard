@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'models/lottery_ticket_model.dart';
+import 'models/bingo_ticket_model.dart';
 
 class FoldingCardboardComponentCustom extends StatefulWidget {
   final Color colorMain;
@@ -7,7 +7,7 @@ class FoldingCardboardComponentCustom extends StatefulWidget {
   final Color cellColor;
   final Color cellText;
   final String title;
-  final LotteryTicketModel lotteryTicketModel;
+  final BingoTicketModel bingoTicketModel;
   final EdgeInsetsGeometry padding;
   final double borderRadiusCircularCardBoard;
   final double borderRadiusCircularCell;
@@ -15,7 +15,7 @@ class FoldingCardboardComponentCustom extends StatefulWidget {
   const FoldingCardboardComponentCustom({
     Key? key,
     this.title = "Número de cartón",
-    required this.lotteryTicketModel,
+    required this.bingoTicketModel,
     this.colorMain = const Color.fromARGB(255, 33, 82, 243),
     this.backgroundColor = Colors.white,
     this.cellText = Colors.black54,
@@ -32,7 +32,7 @@ class FoldingCardboardComponentCustom extends StatefulWidget {
 
 class _FoldingCardboardComponentCustomState
     extends State<FoldingCardboardComponentCustom> {
-  bool _isVisible = false;
+  bool _isOpen = false;
   double sizeTable = 0;
 
   @override
@@ -58,7 +58,7 @@ class _FoldingCardboardComponentCustomState
 
   void onTap() {
     setState(() {
-      if (!_isVisible) {
+      if (!_isOpen) {
         sizeTable = (MediaQuery.of(context).size.width.toDouble() / 9 >= 52
                 ? 52
                 : (MediaQuery.of(context).size.width.toDouble() / 9) * 5) +
@@ -66,7 +66,7 @@ class _FoldingCardboardComponentCustomState
       } else {
         sizeTable = 0;
       }
-      _isVisible = !_isVisible;
+      _isOpen = !_isOpen;
     });
   }
 
@@ -99,8 +99,8 @@ class _FoldingCardboardComponentCustomState
   }
 
   String addNumbers(index) {
-    if (index < widget.lotteryTicketModel.numberList.length) {
-      return widget.lotteryTicketModel.numberList[index].toString();
+    if (index < widget.bingoTicketModel.numberList.length) {
+      return widget.bingoTicketModel.numberList[index].toString();
     } else {
       return "-";
     }
@@ -165,7 +165,7 @@ class _FoldingCardboardComponentCustomState
                                   borderRadius: BorderRadius.circular(20),
                                 ),
                                 child: Text(
-                                  widget.lotteryTicketModel.number.toString(),
+                                  widget.bingoTicketModel.number.toString(),
                                   style: TextStyle(
                                     color: widget.colorMain, //colorMain
                                     fontWeight: FontWeight.w600,
@@ -176,7 +176,7 @@ class _FoldingCardboardComponentCustomState
                               ),
                             ),
                             AnimatedRotation(
-                              turns: _isVisible ? -0.5 : 0,
+                              turns: _isOpen ? -0.5 : 0,
                               duration: const Duration(milliseconds: 200),
                               child: Icon(
                                 Icons.arrow_drop_down,
@@ -192,7 +192,7 @@ class _FoldingCardboardComponentCustomState
                   AnimatedContainer(
                     duration: const Duration(milliseconds: 200),
                     curve: Curves.linear,
-                    height: _isVisible
+                    height: _isOpen
                         ? sizeCell * 5 + 55
                         : 0, //sizeCell*5+55, //(MediaQuery.of(context).size.width.toDouble() / 9 >= 52 ? 52 : (MediaQuery.of(context).size.width.toDouble() / 9)*5) + 55,//_isVisible ? sizeTable : (MediaQuery.of(context).size.width.toDouble() / 9 >= 52 ? 52 : (MediaQuery.of(context).size.width.toDouble() / 9)*5) + 55,
                     child: Padding(
