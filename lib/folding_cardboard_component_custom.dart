@@ -71,28 +71,31 @@ class _FoldingCardboardComponentCustomState
   }
 
   _cell(index, sizeCell, sizeNumber) {
-    return Container(
-      width: sizeCell,
-      height: sizeCell,
-      margin: const EdgeInsets.all(
-          5), //index%7 == 0 ? const EdgeInsets.only(right: 5) : const EdgeInsets.only(left: 5),
-      decoration: BoxDecoration(
-          color: widget.cellColor, //Colors.grey.shade200
-          borderRadius: BorderRadius.circular(widget.borderRadiusCircularCell),
-          /*boxShadow: [
-            BoxShadow(
-              color: widget.cellColor.withOpacity(0.9),
-              blurRadius: 2,
-              offset: const Offset(3.5, 3.5),
-            ),
-          ]*/),
-      alignment: Alignment.center,
-      child: Text(
-        addNumbers(index),
-        style: TextStyle(
-          fontWeight: FontWeight.bold,
-          fontSize: sizeNumber,
-          color: widget.cellText, //Colors.black54
+    return AspectRatio(
+      aspectRatio: 1 / 1,
+      child: Container(
+        //width: sizeCell,
+        //height: sizeCell,
+        margin: const EdgeInsets.all(
+            5), //index%7 == 0 ? const EdgeInsets.only(right: 5) : const EdgeInsets.only(left: 5),
+        decoration: BoxDecoration(
+            color: widget.cellColor, //Colors.grey.shade200
+            borderRadius: BorderRadius.circular(widget.borderRadiusCircularCell),
+            /*boxShadow: [
+              BoxShadow(
+                color: widget.cellColor.withOpacity(0.9),
+                blurRadius: 2,
+                offset: const Offset(3.5, 3.5),
+              ),
+            ]*/),
+        alignment: Alignment.center,
+        child: Text(
+          addNumbers(index),
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: sizeNumber,
+            color: widget.cellText, //Colors.black54
+          ),
         ),
       ),
     );
