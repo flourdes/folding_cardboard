@@ -79,13 +79,13 @@ class _FoldingCardboardComponentCustomState
       decoration: BoxDecoration(
           color: widget.cellColor, //Colors.grey.shade200
           borderRadius: BorderRadius.circular(widget.borderRadiusCircularCell),
-          boxShadow: [
+          /*boxShadow: [
             BoxShadow(
               color: widget.cellColor.withOpacity(0.9),
               blurRadius: 2,
               offset: const Offset(3.5, 3.5),
             ),
-          ]),
+          ]*/),
       alignment: Alignment.center,
       child: Text(
         addNumbers(index),
@@ -114,7 +114,7 @@ class _FoldingCardboardComponentCustomState
               BorderRadius.circular(widget.borderRadiusCircularCardBoard),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.5),
+              color: Colors.grey.withOpacity(0.5),
               blurRadius: 10,
               offset: const Offset(0, 10),
             ),

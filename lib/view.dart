@@ -16,7 +16,7 @@ class _ViewState extends State<View> {
   Widget build(BuildContext context) {
     Random rnd = Random();
 
-    int _numberUnique(int limit, List<int> numbers) {
+    int numberUnique(int limit, List<int> numbers) {
     bool flag = false;
     int random = 0;
     if (numbers.isEmpty) {
@@ -29,77 +29,76 @@ class _ViewState extends State<View> {
     return random;
     }
 
-    List<int> _numbersList() {
+    List<int> numbersList() {
       List<int> numbers = [];
       for (int i = 0; i < 33; i++) {
-        numbers.add(_numberUnique(100,numbers));
+        numbers.add(numberUnique(100,numbers));
       }
       return numbers;
     }
 
-    BingoTicketModel lotteryTicket =
-        BingoTicketModel(number: 106044, numberList: _numbersList());
-    BingoTicketModel lotteryTicketB =
-        BingoTicketModel(number: 106040, numberList: _numbersList());
-    BingoTicketModel lotteryTicketC =
-        BingoTicketModel(number: 109033, numberList: _numbersList());
-    BingoTicketModel lotteryTicketD =
-        BingoTicketModel(number: 102099, numberList: _numbersList());
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text("Bingooo"),
+    BingoTicketModel bingoTicket =
+        BingoTicketModel(number: 106044, numberList: numbersList());
+    BingoTicketModel bingoTicketB =
+        BingoTicketModel(number: 106040, numberList: numbersList());
+    BingoTicketModel bingoTicketC =
+        BingoTicketModel(number: 109033, numberList: numbersList());
+    BingoTicketModel bingoTicketD =
+        BingoTicketModel(number: 102099, numberList: numbersList());
+    return Container(
+      decoration: const BoxDecoration(
+        image: DecorationImage(
+          image: AssetImage('assets/background4.jpg'),
+          fit: BoxFit.cover
+        )
       ),
-      body: Container(
-        decoration: const BoxDecoration(
-          color: Colors.grey, //Colors.white38
-          gradient: LinearGradient(
-            colors: [Colors.pink,Colors.white],
-            begin: FractionalOffset.topCenter,
-            end: FractionalOffset.bottomCenter,
-          )
-        ),
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              FoldingCardboardComponentCustom(
-                  bingoTicketModel: lotteryTicket,
+      child: Scaffold(
+        backgroundColor: Colors.transparent,
+        appBar: AppBar(
+            title: const Text("Bingooo"),),
+        body: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  FoldingCardboardComponentCustom(
+                      bingoTicketModel: bingoTicket,
+                  ),
+                  const SizedBox(
+                    height: 30,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(12.0),
+                    child: FoldingCardboardComponentCustom(
+                        bingoTicketModel: bingoTicketB,)
+                  ),
+                  const SizedBox(
+                    height: 30,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(12.0),
+                    child: FoldingCardboardComponentCustom(
+                        bingoTicketModel: bingoTicketC,
+                        padding: const EdgeInsets.all(20),),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(12.0),
+                    child: FoldingCardboardComponentCustom(
+                        bingoTicketModel: bingoTicketD,
+                        backgroundColor: Colors.blueAccent,
+                        borderRadiusCircularCardBoard: 24,
+                        borderRadiusCircularCell: 12,
+                        cellColor: Colors.black,
+                        cellText: Colors.white,
+                        colorMain: Colors.white,
+                        title: "Otro titulo para la tarjeta",
+                        padding: const EdgeInsets.all(12),
+                    ),
+                  ),
+                ],
               ),
-              const SizedBox(
-                height: 30,
-              ),
-              Padding(
-                padding: const EdgeInsets.all(12.0),
-                child: FoldingCardboardComponentCustom(
-                    bingoTicketModel: lotteryTicketB,)
-              ),
-              const SizedBox(
-                height: 30,
-              ),
-              Padding(
-                padding: const EdgeInsets.all(12.0),
-                child: FoldingCardboardComponentCustom(
-                    bingoTicketModel: lotteryTicketC,
-                    padding: const EdgeInsets.all(20),),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(12.0),
-                child: FoldingCardboardComponentCustom(
-                    bingoTicketModel: lotteryTicketD,
-                    backgroundColor: Colors.blueAccent,
-                    borderRadiusCircularCardBoard: 24,
-                    borderRadiusCircularCell: 12,
-                    cellColor: Colors.black,
-                    cellText: Colors.white,
-                    colorMain: Colors.white,
-                    title: "Otro titulo para la tarjeta",
-                    padding: const EdgeInsets.all(12),
-                ),
-              ),
-            ],
-          ),
         ),
       ),
     );
   }
 }
+
