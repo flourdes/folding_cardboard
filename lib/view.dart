@@ -138,7 +138,7 @@ class _ViewState extends State<View> {
         borderRadius: BorderRadius.circular(20),
         child: Container(
           width: double.infinity,
-          height: 350,
+          height: 500,
           decoration: const BoxDecoration(
             color: Colors.white54,
           ),
