@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:folding_cardboard/test.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'view.dart';
+
 
 void main() {
   runApp(const MyApp());
@@ -19,7 +20,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         textTheme: GoogleFonts.rubikTextTheme(),
       ),
-      home: const View(),
+      home: Test(),
     );
   }
 }
