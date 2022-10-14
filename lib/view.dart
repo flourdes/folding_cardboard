@@ -45,58 +45,49 @@ class _ViewState extends State<View> {
         BingoTicketModel(number: 109033, numberList: numbersList());
     BingoTicketModel bingoTicketD =
         BingoTicketModel(number: 102099, numberList: numbersList());
-    return Container(
-      decoration: const BoxDecoration(
-        image: DecorationImage(
-          image: AssetImage('assets/background4.jpg'),
-          fit: BoxFit.cover
-        )
-      ),
-      child: Scaffold(
-        backgroundColor: Colors.transparent,
-        appBar: AppBar(
-            title: const Text("Bingooo"),),
-        body: SingleChildScrollView(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  FoldingCardboardComponentCustom(
-                      bingoTicketModel: bingoTicket,
+    return Scaffold(
+      appBar: AppBar(
+          title: const Text("Bingooo"),),
+      body: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                FoldingCardboardComponentCustom(
+                    bingoTicketModel: bingoTicket,
+                ),
+                const SizedBox(
+                  height: 30,
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(12.0),
+                  child: FoldingCardboardComponentCustom(
+                      bingoTicketModel: bingoTicketB,)
+                ),
+                const SizedBox(
+                  height: 30,
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(12.0),
+                  child: FoldingCardboardComponentCustom(
+                      bingoTicketModel: bingoTicketC,
+                      padding: const EdgeInsets.all(20),),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(12.0),
+                  child: FoldingCardboardComponentCustom(
+                      bingoTicketModel: bingoTicketD,
+                      backgroundColor: Colors.blueAccent,
+                      borderRadiusCircularCardBoard: 24,
+                      borderRadiusCircularCell: 12,
+                      cellColor: Colors.black,
+                      cellText: Colors.white,
+                      colorMain: Colors.white,
+                      title: "Otro titulo para la tarjeta",
+                      padding: const EdgeInsets.all(12),
                   ),
-                  const SizedBox(
-                    height: 30,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(12.0),
-                    child: FoldingCardboardComponentCustom(
-                        bingoTicketModel: bingoTicketB,)
-                  ),
-                  const SizedBox(
-                    height: 30,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(12.0),
-                    child: FoldingCardboardComponentCustom(
-                        bingoTicketModel: bingoTicketC,
-                        padding: const EdgeInsets.all(20),),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(12.0),
-                    child: FoldingCardboardComponentCustom(
-                        bingoTicketModel: bingoTicketD,
-                        backgroundColor: Colors.blueAccent,
-                        borderRadiusCircularCardBoard: 24,
-                        borderRadiusCircularCell: 12,
-                        cellColor: Colors.black,
-                        cellText: Colors.white,
-                        colorMain: Colors.white,
-                        title: "Otro titulo para la tarjeta",
-                        padding: const EdgeInsets.all(12),
-                    ),
-                  ),
-                ],
-              ),
-        ),
+                ),
+              ],
+            ),
       ),
     );
   }
