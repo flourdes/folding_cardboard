@@ -48,14 +48,6 @@ class _ViewState extends State<View> {
         BingoTicketModel(number: 102099, numberList: _numbersList());
     return SafeArea(
       child: Scaffold(
-        floatingActionButton: FloatingActionButton(
-          backgroundColor: Colors.black,
-          onPressed: onTap,
-          child: const Icon(
-            Icons.compare_arrows_sharp,
-            color: Colors.purple,
-          ),
-        ),
         body: Container(
           width: double.infinity,
           height: double.infinity,
@@ -66,10 +58,9 @@ class _ViewState extends State<View> {
               end: FractionalOffset.centerRight,
             )
           ),
-          child: Stack(
-            alignment: Alignment.center,
+          child: Column(
             children: [
-              _editedCardboard(lotteryTicketA, lotteryTicketB, lotteryTicketC, lotteryTicketD),
+              const SizedBox(height: 100,),
               _cardboard(lotteryTicketA, lotteryTicketB, lotteryTicketC, lotteryTicketD),
             ],
           ),
@@ -85,96 +76,54 @@ class _ViewState extends State<View> {
       change = !change;
     });
   }
-  _editedCardboard(lotteryTicketA,lotteryTicketB,lotteryTicketC,lotteryTicketD){
-    return Visibility(
-      visible: changeEdit,
-      child: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            FoldingCardboardComponentCustom(
-              bingoTicketModel: lotteryTicketA,
-            ),
-            const SizedBox(
-              height: 30,
-            ),
-            Padding(
-                padding: const EdgeInsets.all(12.0),
-                child: FoldingCardboardComponentCustom(
-                  bingoTicketModel: lotteryTicketB,)
-            ),
-            const SizedBox(
-              height: 30,
-            ),
-            Padding(
-              padding: const EdgeInsets.all(12.0),
-              child: FoldingCardboardComponentCustom(
-                bingoTicketModel: lotteryTicketC,
-                padding: const EdgeInsets.all(20),),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(12.0),
-              child: FoldingCardboardComponentCustom(
-                bingoTicketModel: lotteryTicketD,
-                backgroundColor: Colors.blueAccent,
-                borderRadiusCircularCardBoard: 24,
-                borderRadiusCircularCell: 12,
-                cellColor: Colors.black,
-                cellColorText: Colors.white,
-                mainColor: Colors.white,
-                title: "Otro titulo para la tarjeta",
-                padding: const EdgeInsets.all(12),
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
   _cardboard(lotteryTicketA,lotteryTicketB,lotteryTicketC,lotteryTicketD){
-    return Visibility(
-      visible: change,
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(20),
-        child: Container(
-          width: double.infinity,
-          height: 500,
-          decoration: const BoxDecoration(
-            color: Colors.white54,
+    return Expanded(
+      child: Visibility(
+        visible: change,
+        child: ClipRRect(
+          borderRadius: const BorderRadius.only(
+            topLeft: Radius.circular(20),
+            topRight: Radius.circular(20),
           ),
-          child: SingleChildScrollView(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 15.0),
-              child: Column(
-                children: [
-                  Text(
-                    "BINGO",
-                    style: TextStyle(
-                      fontSize: 30,
-                      color: Colors.blue.shade800,
-                      letterSpacing: 3,
-                      fontWeight: FontWeight.bold,
+          child: Container(
+            width: double.infinity,
+            decoration: const BoxDecoration(
+              color: Colors.white54,
+            ),
+            child: SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 15.0),
+                child: Column(
+                  children: [
+                    Text(
+                      "BINGO",
+                      style: TextStyle(
+                        fontSize: 30,
+                        color: Colors.blue.shade800,
+                        letterSpacing: 3,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
-                  ),
-                  const SizedBox(height: 30,),
-                  SingleChildScrollView(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        _card(lotteryTicketA),
-                        const SizedBox(
-                          height: 30,
-                        ),_card(lotteryTicketB),
-                        const SizedBox(
-                          height: 30,
-                        ),_card(lotteryTicketC),
-                        const SizedBox(
-                          height: 30,
-                        ),_card(lotteryTicketD),
-                      ],
+                    const SizedBox(height: 30,),
+                    SingleChildScrollView(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          _card(lotteryTicketA),
+                          const SizedBox(
+                            height: 30,
+                          ),_card(lotteryTicketB),
+                          const SizedBox(
+                            height: 30,
+                          ),_card(lotteryTicketC),
+                          const SizedBox(
+                            height: 30,
+                          ),_card(lotteryTicketD),
+                        ],
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ),
