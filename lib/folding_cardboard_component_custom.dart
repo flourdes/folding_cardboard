@@ -87,7 +87,8 @@ class _FoldingCardboardComponentCustomState
                 blurRadius: 2,
                 offset: const Offset(3.5, 3.5),
               ),
-            ]*/),
+            ]*/
+            ),
         alignment: Alignment.center,
         child: Text(
           addNumbers(index),
@@ -191,19 +192,20 @@ class _FoldingCardboardComponentCustomState
                       ],
                     ),
                   ),
-                  AnimatedContainer(
-                    duration: const Duration(milliseconds: 250),
-                    curve: Curves.linear,
-                    height: _isOpen
-                        ? sizeCell * 5 + 55
-                        : 0, //sizeCell*5+55, //(MediaQuery.of(context).size.width.toDouble() / 9 >= 52 ? 52 : (MediaQuery.of(context).size.width.toDouble() / 9)*5) + 55,//_isVisible ? sizeTable : (MediaQuery.of(context).size.width.toDouble() / 9 >= 52 ? 52 : (MediaQuery.of(context).size.width.toDouble() / 9)*5) + 55,
-                    child: Padding(
-                      padding: EdgeInsets.only(
-                          top: widget.padding.vertical / 3,
-                          right:
-                              5), //const EdgeInsets.only(top: 10,left: 5,right: 10),
-                      child: Table(
-                        children: cardboard,
+                  AspectRatio(
+                    aspectRatio: _isOpen? 1 / 0.715 : 1 / 0.000000000001,
+                    child: AnimatedContainer(
+                      duration: const Duration(milliseconds: 250),
+                      curve: Curves.linear,
+                      //height: _isOpen? sizeCell * 5 + 55: 0, //sizeCell*5+55, //(MediaQuery.of(context).size.width.toDouble() / 9 >= 52 ? 52 : (MediaQuery.of(context).size.width.toDouble() / 9)*5) + 55,//_isVisible ? sizeTable : (MediaQuery.of(context).size.width.toDouble() / 9 >= 52 ? 52 : (MediaQuery.of(context).size.width.toDouble() / 9)*5) + 55,
+                      child: Padding(
+                        padding: EdgeInsets.only(
+                            top: widget.padding.vertical / 3,
+                            right:
+                                5), //const EdgeInsets.only(top: 10,left: 5,right: 10),
+                        child: Table(
+                          children: cardboard,
+                        ),
                       ),
                     ),
                   )
