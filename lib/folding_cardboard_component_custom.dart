@@ -31,8 +31,9 @@ class FoldingCardboardComponentCustom extends StatefulWidget {
 }
 
 class _FoldingCardboardComponentCustomState
-    extends State<FoldingCardboardComponentCustom> {
-  bool _isVisible = false;
+    extends State<FoldingCardboardComponentCustom>
+    with SingleTickerProviderStateMixin {
+  bool _isOpen = false;
   double sizeTable = 0;
 
   @override
@@ -58,7 +59,7 @@ class _FoldingCardboardComponentCustomState
 
   void onTap() {
     setState(() {
-      if (!_isVisible) {
+      if (!_isOpen) {
         sizeTable = (MediaQuery.of(context).size.width.toDouble() / 9 >= 52
                 ? 52
                 : (MediaQuery.of(context).size.width.toDouble() / 9) * 5) +
@@ -66,7 +67,7 @@ class _FoldingCardboardComponentCustomState
       } else {
         sizeTable = 0;
       }
-      _isVisible = !_isVisible;
+      _isOpen = !_isOpen;
     });
   }
 
@@ -82,7 +83,7 @@ class _FoldingCardboardComponentCustomState
           boxShadow: [
             BoxShadow(
               color: widget.cellColor.withOpacity(0.9),
-              blurRadius: 2,
+              blurRadius: 1,
               offset: const Offset(3.5, 3.5),
             ),
           ]),
@@ -114,7 +115,7 @@ class _FoldingCardboardComponentCustomState
               BorderRadius.circular(widget.borderRadiusCircularCardBoard),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.5),
+              color: Colors.black26.withOpacity(0.5),
               blurRadius: 10,
               offset: const Offset(0, 10),
             ),
@@ -176,8 +177,8 @@ class _FoldingCardboardComponentCustomState
                               ),
                             ),
                             AnimatedRotation(
-                              turns: _isVisible ? -0.5 : 0,
-                              duration: const Duration(milliseconds: 200),
+                              turns: _isOpen ? 0 : -0.5, 
+                              duration: const Duration(milliseconds:200),
                               child: Icon(
                                 Icons.arrow_drop_down,
                                 size: sizeIcon,
@@ -192,9 +193,9 @@ class _FoldingCardboardComponentCustomState
                   AnimatedContainer(
                     duration: const Duration(milliseconds: 200),
                     curve: Curves.linear,
-                    height: _isVisible
+                    height: _isOpen
                         ? sizeCell * 5 + 55
-                        : 0, //sizeCell*5+55, //(MediaQuery.of(context).size.width.toDouble() / 9 >= 52 ? 52 : (MediaQuery.of(context).size.width.toDouble() / 9)*5) + 55,//_isVisible ? sizeTable : (MediaQuery.of(context).size.width.toDouble() / 9 >= 52 ? 52 : (MediaQuery.of(context).size.width.toDouble() / 9)*5) + 55,
+                        : 0, //sizeCell*5+55, //(MediaQuery.of(context).size.width.toDouble() / 9 >= 52 ? 52 : (MediaQuery.of(context).size.width.toDouble() / 9)*5) + 55,//_isOpen ? sizeTable : (MediaQuery.of(context).size.width.toDouble() / 9 >= 52 ? 52 : (MediaQuery.of(context).size.width.toDouble() / 9)*5) + 55,
                     child: Padding(
                       padding: EdgeInsets.only(
                           top: widget.padding.vertical / 3,
