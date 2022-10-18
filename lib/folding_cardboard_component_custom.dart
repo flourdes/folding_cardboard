@@ -196,7 +196,7 @@ class _FoldingCardboardComponentCustomState
                     duration: const Duration(milliseconds: 250),
                     curve: Curves.linear,
                     child: AspectRatio(
-                      aspectRatio: _isOpen? 1 / 0.715 : 1 / 0.000000000001,
+                      aspectRatio: _isOpen? 1 / 0.716 : 1 / 0.000000000001,
                       child: Padding(
                         padding: EdgeInsets.only(
                             top: widget.padding.vertical / 3,
