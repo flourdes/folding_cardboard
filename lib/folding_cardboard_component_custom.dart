@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'models/bingo_ticket_model.dart';
 
 class FoldingCardboardComponentCustom extends StatefulWidget {
-  final Color colorMain;
+  final Color topBarColor;
   final Color backgroundColor;
-  final Color cellColor;
-  final Color cellText;
+  final Color cellsColor;
+  final Color cellTextsColor;
   final String title;
   final BingoTicketModel bingoTicketModel;
   final EdgeInsetsGeometry padding;
@@ -16,10 +16,10 @@ class FoldingCardboardComponentCustom extends StatefulWidget {
     Key? key,
     this.title = "Número de cartón",
     required this.bingoTicketModel,
-    this.colorMain = const Color.fromARGB(255, 33, 82, 243),
+    this.topBarColor = const Color.fromARGB(255, 33, 82, 243),
     this.backgroundColor = Colors.white,
-    this.cellText = Colors.black54,
-    this.cellColor = const Color.fromARGB(255, 239, 239, 239),
+    this.cellTextsColor = Colors.black54,
+    this.cellsColor = const Color.fromARGB(255, 239, 239, 239),
     this.padding = const EdgeInsets.all(8),
     this.borderRadiusCircularCardBoard = 12,
     this.borderRadiusCircularCell = 6,
@@ -42,16 +42,15 @@ class _FoldingCardboardComponentCustomState
     late final double sizeNumber = size / 9 >= 52 ? 19.5 : size / 24;
     late final double sizeText = size / 9 >= 52 ? 19.5 : size / 24;
     late final double sizeContainerMainNumber =
-        size / 5.2 >= 90 ? 90 : size / 5.2;
+        size / 4 >= 117.0 ? 117.0 : size / 4;
     late final double sizeIcon = size / 10.4 >= 45 ? 45 : size / 10.4;
-
-    List<TableRow> cardboard = List.generate(
-        5,
-        (indexCol) => TableRow(
-            children: List.generate(
-                7,
-                (indexRow) =>
-                    _cell(indexCol * 7 + indexRow, sizeCell, sizeNumber))));
+    
+    print(sizeContainerMainNumber);
+    
+    List<TableRow> cardboard = 
+    List.generate(5,(indexCol) => TableRow(children: 
+    List.generate(7,(indexRow) =>_cell(indexCol * 7 + indexRow, sizeCell, sizeNumber))));
+    
     return _expansionTable(
         cardboard, sizeCell, sizeText, sizeContainerMainNumber, sizeIcon);
   }
@@ -79,11 +78,11 @@ class _FoldingCardboardComponentCustomState
         margin: const EdgeInsets.all(
             5), //index%7 == 0 ? const EdgeInsets.only(right: 5) : const EdgeInsets.only(left: 5),
         decoration: BoxDecoration(
-            color: widget.cellColor, //Colors.grey.shade200
+            color: widget.cellsColor, //Colors.grey.shade200
             borderRadius: BorderRadius.circular(widget.borderRadiusCircularCell),
             /*boxShadow: [
               BoxShadow(
-                color: widget.cellColor.withOpacity(0.9),
+                color: widget.cellsColor.withOpacity(0.9),
                 blurRadius: 2,
                 offset: const Offset(3.5, 3.5),
               ),
@@ -95,7 +94,7 @@ class _FoldingCardboardComponentCustomState
           style: TextStyle(
             fontWeight: FontWeight.bold,
             fontSize: sizeNumber,
-            color: widget.cellText, //Colors.black54
+            color: widget.cellTextsColor, //Colors.black54
           ),
         ),
       ),
@@ -138,59 +137,56 @@ class _FoldingCardboardComponentCustomState
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.only(right: 0, left: 5),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          widget.title,
-                          style: TextStyle(
-                            fontSize: sizeText,
-                            fontWeight: FontWeight.w500,
-                            color: widget.colorMain, //colorMain
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        " ${widget.title}",
+                        style: TextStyle(
+                          fontSize: sizeText,
+                          fontWeight: FontWeight.w500,
+                          color: widget.topBarColor, //topBarColor
+                        ),
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(right: 8.0),
+                            child: Container(
+                              height: sizeContainerMainNumber / 3.25,
+                              width: sizeContainerMainNumber,
+                              alignment: Alignment.center,
+                              decoration: BoxDecoration(
+                                border: Border.all(
+                                  width: 2,
+                                  color: widget.topBarColor, //topBarColor
+                                ),
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                              child: Text(
+                                widget.bingoTicketModel.number.toString(),
+                                style: TextStyle(
+                                  color: widget.topBarColor, //topBarColor
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: sizeText / 1.15,
+                                  letterSpacing: 2,
+                                ),
+                              ),
+                            ),
                           ),
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.only(right: 8.0),
-                              child: Container(
-                                height: sizeContainerMainNumber / 2.5,
-                                width: sizeContainerMainNumber,
-                                alignment: Alignment.center,
-                                decoration: BoxDecoration(
-                                  border: Border.all(
-                                    width: 2,
-                                    color: widget.colorMain, //colorMain
-                                  ),
-                                  borderRadius: BorderRadius.circular(20),
-                                ),
-                                child: Text(
-                                  widget.bingoTicketModel.number.toString(),
-                                  style: TextStyle(
-                                    color: widget.colorMain, //colorMain
-                                    fontWeight: FontWeight.w600,
-                                    fontSize: sizeText / 1.15,
-                                    letterSpacing: 1,
-                                  ),
-                                ),
-                              ),
+                          AnimatedRotation(
+                            turns: _isOpen ? -0.5 : 0,
+                            duration: const Duration(milliseconds: 250),
+                            child: Icon(
+                              Icons.arrow_drop_down,
+                              size: sizeIcon,
+                              color: widget.topBarColor,
                             ),
-                            AnimatedRotation(
-                              turns: _isOpen ? -0.5 : 0,
-                              duration: const Duration(milliseconds: 250),
-                              child: Icon(
-                                Icons.arrow_drop_down,
-                                size: sizeIcon,
-                                color: widget.colorMain,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
+                          ),
+                        ],
+                      ),
+                    ],
                   ),
                   AnimatedContainer(
                     duration: const Duration(milliseconds: 250),

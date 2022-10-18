@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         textTheme: GoogleFonts.rubikTextTheme(),
       ),
-      home: Test(),
+      home: const Test(),
     );
   }
 }

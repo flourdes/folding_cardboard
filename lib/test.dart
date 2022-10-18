@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:folding_cardboard/folding_cardboard_component.dart';
 import 'folding_cardboard_component_custom.dart';
 import 'models/bingo_ticket_model.dart';
 
@@ -73,7 +74,12 @@ class Test extends StatelessWidget {
                         padding: const EdgeInsets.only(bottom: 10),
                         child: Row(
                           children: const [
-                            Text('10° Bingo Ayuda para los callejeritos'),
+                            SizedBox(
+                              width: 130,
+                              child: Text(
+                                '10° Bingo Ayuda para los callejeritos'
+                              ),
+                            ),
                           ],
                         ),
                       ),
