@@ -46,58 +46,49 @@ class _ViewState extends State<View> {
     LotteryTicketModel lotteryTicketD =
         LotteryTicketModel(number: 102099, numberList: _numbersList());
     return Scaffold(
+      backgroundColor: Colors.grey,
       appBar: AppBar(
         title: const Text("Bingooo"),
       ),
-      body: Container(
-        decoration: const BoxDecoration(
-          color: Colors.grey, //Colors.white38
-          gradient: LinearGradient(
-            colors: [Colors.pink,Colors.white],
-            begin: FractionalOffset.topCenter,
-            end: FractionalOffset.bottomCenter,
-          )
-        ),
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              FoldingCardboardComponentCustom(
-                  lotteryTicketModel: lotteryTicket,
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            FoldingCardboardComponentCustom(
+                lotteryTicketModel: lotteryTicket,
+            ),
+            const SizedBox(
+              height: 30,
+            ),
+            Padding(
+              padding: const EdgeInsets.all(12.0),
+              child: FoldingCardboardComponentCustom(
+                  lotteryTicketModel: lotteryTicketB,)
+            ),
+            const SizedBox(
+              height: 30,
+            ),
+            Padding(
+              padding: const EdgeInsets.all(12.0),
+              child: FoldingCardboardComponentCustom(
+                  lotteryTicketModel: lotteryTicketC,
+                  padding: const EdgeInsets.all(20),),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(12.0),
+              child: FoldingCardboardComponentCustom(
+                  lotteryTicketModel: lotteryTicketD,
+                  backgroundColor: Colors.blueAccent,
+                  borderRadiusCircularCardBoard: 24,
+                  borderRadiusCircularCell: 12,
+                  cellColor: Colors.black,
+                  cellText: Colors.white,
+                  colorMain: Colors.white,
+                  title: "Otro titulo para la tarjeta",
+                  padding: const EdgeInsets.all(12),
               ),
-              const SizedBox(
-                height: 30,
-              ),
-              Padding(
-                padding: const EdgeInsets.all(12.0),
-                child: FoldingCardboardComponentCustom(
-                    lotteryTicketModel: lotteryTicketB,)
-              ),
-              const SizedBox(
-                height: 30,
-              ),
-              Padding(
-                padding: const EdgeInsets.all(12.0),
-                child: FoldingCardboardComponentCustom(
-                    lotteryTicketModel: lotteryTicketC,
-                    padding: const EdgeInsets.all(20),),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(12.0),
-                child: FoldingCardboardComponentCustom(
-                    lotteryTicketModel: lotteryTicketD,
-                    backgroundColor: Colors.blueAccent,
-                    borderRadiusCircularCardBoard: 24,
-                    borderRadiusCircularCell: 12,
-                    cellColor: Colors.black,
-                    cellText: Colors.white,
-                    colorMain: Colors.white,
-                    title: "Otro titulo para la tarjeta",
-                    padding: const EdgeInsets.all(12),
-                ),
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
