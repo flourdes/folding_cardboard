@@ -192,17 +192,15 @@ class _FoldingCardboardComponentCustomState
                       ],
                     ),
                   ),
-                  AspectRatio(
-                    aspectRatio: _isOpen? 1 / 0.715 : 1 / 0.000000000001,
-                    child: AnimatedContainer(
-                      duration: const Duration(milliseconds: 250),
-                      curve: Curves.linear,
-                      //height: _isOpen? sizeCell * 5 + 55: 0, //sizeCell*5+55, //(MediaQuery.of(context).size.width.toDouble() / 9 >= 52 ? 52 : (MediaQuery.of(context).size.width.toDouble() / 9)*5) + 55,//_isVisible ? sizeTable : (MediaQuery.of(context).size.width.toDouble() / 9 >= 52 ? 52 : (MediaQuery.of(context).size.width.toDouble() / 9)*5) + 55,
+                  AnimatedContainer(
+                    duration: const Duration(milliseconds: 250),
+                    curve: Curves.linear,
+                    child: AspectRatio(
+                      aspectRatio: _isOpen? 1 / 0.715 : 1 / 0.000000000001,
                       child: Padding(
                         padding: EdgeInsets.only(
                             top: widget.padding.vertical / 3,
-                            right:
-                                5), //const EdgeInsets.only(top: 10,left: 5,right: 10),
+                            right: 2), //const EdgeInsets.only(top: 10,left: 5,right: 10),
                         child: Table(
                           children: cardboard,
                         ),
