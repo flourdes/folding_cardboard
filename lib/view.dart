@@ -1,95 +1,127 @@
 import 'dart:math';
+
 import 'package:flutter/material.dart';
-import 'package:folding_cardboard/folding_cardboard_component_custom.dart';
-import 'models/lottery_ticket_model.dart';
+import 'folding_cardboard_component_custom.dart';
+import 'models/bingo_ticket_model.dart';
 
-class View extends StatefulWidget {
-  final String id = "view";
-  const View({Key? key}) : super(key: key);
+class Test extends StatelessWidget {
+  const Test({Key? key}) : super(key: key);
 
-  @override
-  State<View> createState() => _ViewState();
-}
-
-class _ViewState extends State<View> {
   @override
   Widget build(BuildContext context) {
     Random rnd = Random();
-
-    int _numberUnique(int limit, List<int> numbers) {
-    bool flag = false;
-    int random = 0;
-    if (numbers.isEmpty) {
-      return rnd.nextInt(limit) + 1;
+    int numberUnique(int limit, List<int> numbers) {
+      bool flag = false;
+      int random = 0;
+      if (numbers.isEmpty) {
+        return rnd.nextInt(limit) + 1;
+      }
+      while (!flag) {
+        random = rnd.nextInt(limit) + 1;
+        flag = !numbers.contains(random);
+      }
+      return random;
     }
-    while (!flag) {
-      random = rnd.nextInt(limit) + 1;
-      flag = !numbers.contains(random);
-    }
-    return random;
-    }
-
-    List<int> _numbersList() {
+    List<int> numbersList() {
       List<int> numbers = [];
       for (int i = 0; i < 33; i++) {
-        numbers.add(_numberUnique(100,numbers));
+        numbers.add(numberUnique(100,numbers));
       }
       return numbers;
     }
+    BingoTicketModel bingoTicket =
+    BingoTicketModel(number: 106044, numberList: numbersList());
+    BingoTicketModel bingoTicketB =
+    BingoTicketModel(number: 106040, numberList: numbersList());
+    BingoTicketModel bingoTicketC =
+    BingoTicketModel(number: 109033, numberList: numbersList());
 
-    LotteryTicketModel lotteryTicket =
-        LotteryTicketModel(number: 106044, numberList: _numbersList());
-    LotteryTicketModel lotteryTicketB =
-        LotteryTicketModel(number: 106040, numberList: _numbersList());
-    LotteryTicketModel lotteryTicketC =
-        LotteryTicketModel(number: 109033, numberList: _numbersList());
-    LotteryTicketModel lotteryTicketD =
-        LotteryTicketModel(number: 102099, numberList: _numbersList());
+
     return Scaffold(
-      backgroundColor: Colors.grey,
       appBar: AppBar(
-        title: const Text("Bingooo"),
+        elevation: 0,
+        backgroundColor: Colors.teal,
+        leading: _cuadrado(),
+        actions: [
+          _cuadrado(),
+          _cuadrado()
+        ],
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            FoldingCardboardComponentCustom(
-                lotteryTicketModel: lotteryTicket,
-            ),
-            const SizedBox(
-              height: 30,
-            ),
-            Padding(
-              padding: const EdgeInsets.all(12.0),
-              child: FoldingCardboardComponentCustom(
-                  lotteryTicketModel: lotteryTicketB,)
-            ),
-            const SizedBox(
-              height: 30,
-            ),
-            Padding(
-              padding: const EdgeInsets.all(12.0),
-              child: FoldingCardboardComponentCustom(
-                  lotteryTicketModel: lotteryTicketC,
-                  padding: const EdgeInsets.all(20),),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(12.0),
-              child: FoldingCardboardComponentCustom(
-                  lotteryTicketModel: lotteryTicketD,
-                  backgroundColor: Colors.blueAccent,
-                  borderRadiusCircularCardBoard: 24,
-                  borderRadiusCircularCell: 12,
-                  cellColor: Colors.black,
-                  cellText: Colors.white,
-                  colorMain: Colors.white,
-                  title: "Otro titulo para la tarjeta",
-                  padding: const EdgeInsets.all(12),
+        body: Container(
+          width: double.infinity,
+          color: Colors.teal,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Padding(
+                padding: EdgeInsets.all(10),
+                child: Text('Mis cartones'),
               ),
-            ),
-          ],
-        ),
+              Expanded(
+                child: Container(
+                  padding: const EdgeInsets.all(20),
+                  width: double.infinity,
+                  decoration: const BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.only(
+                          topRight: Radius.circular(20), topLeft: Radius.circular(20))
+                  ),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 10),
+                        child: Row(
+                          children: const [
+                            SizedBox(
+                              width: 130,
+                              child: Text(
+                                '10° Bingo Ayuda para los callejeritos'
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Expanded(
+                        child: SingleChildScrollView(
+                          child: Column(
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.all(10),
+                                child: FoldingCardboardComponentCustom(bingoTicketModel: bingoTicket,),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(10),
+                                child: FoldingCardboardComponentCustom(bingoTicketModel: bingoTicketB,),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(10),
+                                child: FoldingCardboardComponentCustom(bingoTicketModel: bingoTicketC,),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+
+
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ));
+  }
+  Widget _cuadrado(){
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Container(
+          width: 40,
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(10),
+          ),
+          child: const Icon(Icons.add,color: Colors.black,),
       ),
     );
   }

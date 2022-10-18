@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
-import 'models/lottery_ticket_model.dart';
+import 'models/bingo_ticket_model.dart';
 
 class FoldingCardboardComponent extends StatefulWidget {
   final String id = "folding_cardboard_component";
   final Color color;
   final String title;
-  final LotteryTicketModel lotteryTicketModel;
+  final BingoTicketModel bingoTicketModel;
   const FoldingCardboardComponent(
       {super.key,
       this.title = "Número de cartón",
-      required this.lotteryTicketModel,
+      required this.bingoTicketModel,
       this.color = Colors.blue});
 
   @override
@@ -49,8 +49,8 @@ class _FoldingCardboardComponentState extends State<FoldingCardboardComponent> {
     );
   }
   String addNumbers(index){
-    if(index < widget.lotteryTicketModel.numberList.length){
-      return widget.lotteryTicketModel.numberList[index].toString();
+    if(index < widget.bingoTicketModel.numberList.length){
+      return widget.bingoTicketModel.numberList[index].toString();
     }else{
       return "-";
     }
@@ -85,7 +85,7 @@ class _FoldingCardboardComponentState extends State<FoldingCardboardComponent> {
                           borderRadius: BorderRadius.circular(20),
                         ),
                         child: Text(
-                          widget.lotteryTicketModel.number.toString(),
+                          widget.bingoTicketModel.number.toString(),
                           style: const TextStyle(color: Colors.blue, fontWeight: FontWeight.w600, letterSpacing: 1),
                         ),
                       ),
