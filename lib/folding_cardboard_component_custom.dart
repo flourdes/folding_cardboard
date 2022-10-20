@@ -119,7 +119,7 @@ class _FoldingCardboardComponentCustomState
               BorderRadius.circular(widget.borderRadiusCircularCardBoard),
           boxShadow: [
             BoxShadow(
-              color: Colors.black26.withOpacity(0.5),
+              color: Colors.grey.withOpacity(0.5),
               blurRadius: 10,
               offset: const Offset(0, 10),
             ),
