@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'models/bingo_ticket_model.dart';
 
 class FoldingCardboardComponentCustom extends StatefulWidget {
   final Color colorMain;
@@ -11,7 +10,17 @@ class FoldingCardboardComponentCustom extends StatefulWidget {
   final EdgeInsetsGeometry padding;
   final double borderRadiusCircularCardBoard;
   final double borderRadiusCircularCell;
-
+  ///-- INFO --
+  ///
+  ///(Grupo 2 segunda semana)
+  ///
+  ///Colaboradores en este widget: Caliva Gaston, Fadel Nicolas, Fernandez Lourdes.
+  ///
+  ///Carton de bingo desplegable (animado), recibe un modelo de bingo con las siguientes propiedades 'int number, List <int> numberList,
+  ///estas propiedades generan un numero de carton y una lista con x cantidad de numeros que rellenan las celdas del carton.
+  ///
+  ///Atributos propios del custom widget: Color background, Color colorMain, Color cellColor, Color cellText, String title,
+  ///EdgeInsetsGeometry padding, double borderRadiusCircularCardBoard, double borderRadiusCircularCell.
   const FoldingCardboardComponentCustom({
     Key? key,
     this.title = "Número de cartón",
@@ -220,4 +229,10 @@ class _FoldingCardboardComponentCustomState
       ),
     );
   }
+}
+
+class BingoTicketModel{
+  int number;
+  List<int> numberList;
+  BingoTicketModel({required this.number, required this.numberList});
 }
